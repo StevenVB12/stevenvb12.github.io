@@ -14,6 +14,9 @@ theme: minima
 
 markdown: GFM
 
+# For copy button on code
+enable_copy_code_button: true
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
