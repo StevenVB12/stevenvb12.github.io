@@ -12,9 +12,7 @@ description: >
 
 theme: minima
 
-markdown: kramdown
-kramdown:
-  input: GFM
+markdown: CommonMarkGhPages
 
 plugins:
   - jekyll-feed
