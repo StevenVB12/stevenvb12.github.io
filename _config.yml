@@ -12,6 +12,7 @@ description: >
 
 theme: minima
 
+highlighter: rouge
 markdown: GFM
 
 plugins:
