@@ -18,5 +18,3 @@ Note
   
 </div>
 
-\circled{1}
-\circled{2}
