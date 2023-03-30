@@ -4,6 +4,7 @@ title: "Minimap2 genome alignment tutorial"
 categories: misc
 ---
 
+{% include codeHeader.html %}
 ```r
 # First set you working directory.
 # (You can also use the '...' under the 'File' tab on the right of Rstudio 
