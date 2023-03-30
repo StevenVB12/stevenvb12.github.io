@@ -14,8 +14,6 @@ theme: minima
 
 markdown: GFM
 
-enable_copy_code_button
-
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
