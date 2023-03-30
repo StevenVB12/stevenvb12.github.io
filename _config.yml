@@ -6,7 +6,7 @@ author:
 # The `>` after `description:` means to ignore line-breaks until next key.
 # If you want to omit the line-break after the end of text, use `>-` instead.
 description: >
-  Tutorial for a Minimmap2 genome alignment and a seq-seq-pan pan-genome alignment with visualizations in R.
+  Tutorials for a Minimmap2 genome alignment and a seq-seq-pan pan-genome alignment with visualizations in R.
 
 # Build settings
 
