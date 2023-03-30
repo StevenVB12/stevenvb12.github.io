@@ -1,14 +1,12 @@
-title: Your awesome title
+title: Tutorials by Steven Van Belleghem
 author:
-  name: GitHub User
-  email: your-email@domain.com
+  name: Steven Van Belleghem
+  email: steven.vanbelleghem@kuleuven.be
 
 # The `>` after `description:` means to ignore line-breaks until next key.
 # If you want to omit the line-break after the end of text, use `>-` instead.
 description: >
-  Write an awesome description for your new site here. You can edit this line
-  in _config.yml. It will appear in your document head meta (for Google search
-  results) and in your feed.xml site description.
+  Tutorial for a Minimmap2 genome alignment and a seq-seq-pan pan-genome alignment with visualizations in R.
 
 # Build settings
 
@@ -21,6 +19,10 @@ plugins:
 # Theme-specific settings
 
 minima:
+  social_links:
+    - { platform: twitter,        user_url: "https://twitter.com/svbelleghem" }
+    - { platform: github,         user_url: "https://github.com/StevenVB12" }
+    - { platform: mastodon,         user_url: "https://ecoevo.social/@SVB" }
   # Minima date format.
   # Refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this.
   #
