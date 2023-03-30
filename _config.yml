@@ -12,8 +12,9 @@ description: >
 
 theme: minima
 
-highlighter: rouge
-markdown: GFM
+markdown: kramdown
+kramdown:
+  input: GFM
 
 plugins:
   - jekyll-feed
