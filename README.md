@@ -14,7 +14,7 @@ In this tutorial I guide you through code for a [Minimmap2](https://academic.oup
 
 
 
-Similar code has been used to create figures as in:
+Similar code has been used to create figures in:
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
 
