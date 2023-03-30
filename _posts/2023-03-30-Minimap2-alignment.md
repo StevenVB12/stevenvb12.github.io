@@ -14,7 +14,19 @@ setwd("G:/My Drive/Workshop_pan_genomics_12042023")
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
 
+  ````
+  Note
+  ````
 Note
+  
+</div>
+
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;">
+
+  ````
+  Note
+  ````
   
 </div>
 
