@@ -25,11 +25,11 @@ The final result should look like this:
   For this exercise, you can navigate to http://ensembl.lepbase.org/ and click on the links to the <i>Heliconius erato demophoon</i> (v1) and <i>Heliconius melpomene melpomene</i> (Hmel2) genomes. At the right top, you can search for "optix". The search result will return you the gene model name (e.g. evm.TU.Herato1801.64) and its location (e.g. scaffold 'Herato1801' at position '1239943' to '1251211'). 
   
   ````
-    # optix H. erato
-    Herato1801:1239943-1251211
-    
-    # optix H. melpomene
-    Hmel218003:705604-706407
+  # optix H. erato
+  Herato1801:1239943-1251211
+
+  # optix H. melpomene
+  Hmel218003:705604-706407
   ````
   
   When you click on the gene model, you can see what genes surround the <i>optix</i>. You can also see a botton on the left "Export data". This allows you to export the sequence as a .fasta file. Using this, you can try exporting not just the <i>optix</i> but a 2,000,000 bp region surrounding it.
@@ -37,7 +37,7 @@ The final result should look like this:
   ````
   # scaffold Herato1801 start 1 end 2000000
   Herato1801_1_2000000.fasta.gz
-  
+
   # scaffold Hmel213003 start 1 end 2000000
   Hmel213003_1_2000000.fasta.gz
   ````
@@ -91,11 +91,5 @@ The final result should look like this:
 </div>
 
 
-<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;">
 
-  ````
-  Note
-  ````
-  
-</div>
 
