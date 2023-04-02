@@ -4,7 +4,7 @@ title: "Minimap2 genome alignment tutorial"
 categories: misc
 ---
 
-In this tutorial we will align a piece of chromosome of two <i>Heliconius</i> butterfly species that includes the <i>optix</i> gene. The <i>optix</> gene codes for a   transcription factor that plays a key role in the development of red color pattern elements.
+In this tutorial we will align a piece of chromosome of two <i>Heliconius</i> butterfly species that includes the <i>optix</i> gene. The <i>optix</i> gene codes for a   transcription factor that plays a key role in the development of red color pattern elements.
   
   For this exercise, I navigated to http://ensembl.lepbase.org/ and clicked on the links to the <i>Heliconius erato demophoon</i> (v1) and <i>Heliconius melpomene melpomene</i> (Hmel2) genomes. At the right top, you can search for "optix". The search result will return you the gene model name (e.g. evm.TU.Herato1801.64) and its location (e.g. scaffold 'Herato1801' at position '1239943' to '1251211'). 
   
