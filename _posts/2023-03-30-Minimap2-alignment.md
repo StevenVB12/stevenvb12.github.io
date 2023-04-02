@@ -26,6 +26,8 @@ In this tutorial we will align a piece of chromosome of two <i>Heliconius</i> bu
   Hmel213003_1_2000000.fasta.gz
   ````
   
+  You can also find these fasta files [here](https://github.com/StevenVB12/Tutorial_pan_genomics/tree/main/input).
+  
   
 
 
