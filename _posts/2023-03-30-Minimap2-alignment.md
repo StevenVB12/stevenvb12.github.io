@@ -40,20 +40,23 @@ The final result should look like this:
   
   ### 3. Minimap2 aligner
   
+  The `-x asm20` option is a preset to optimize alignment of sequences divergent up to 20%. The `--no-long-join -r 200` assures that long gaps aren't ignored for building long alignments and that alignments include no gaps longer than 200 bp. See [here](https://lh3.github.io/minimap2/minimap2.html) for more detailed information on the Minimap2 command. 
   
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #d9edf7; border-color: #000000;">
+  ````
+  minimap2 -x asm20 Herato1801_1_2000000.fasta Hmel213003_1_2000000.fasta --no-long-join -r 200 | cut -f 1-12 > Minimap_erato_melp.sam
+  ````
+</div>
   
   ### 4. Visualizations in R
   
+  ```r
+  # First set you working directory.
+  # (You can also use the '...' under the 'File' tab on the right of Rstudio 
+  # to navigate to your folder then click 'More' > 'Set as working directory')
 
-
-
-```r
-# First set you working directory.
-# (You can also use the '...' under the 'File' tab on the right of Rstudio 
-# to navigate to your folder then click 'More' > 'Set as working directory')
-
-setwd("G:/My Drive/Workshop_pan_genomics_12042023")
-```
+  setwd("G:/My Drive/Workshop_pan_genomics_12042023")
+  ```
 
 
 
