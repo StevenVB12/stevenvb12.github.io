@@ -14,6 +14,12 @@ The final result should look like this:
   <img src="/docs/assets/Plot_minimap.png" width="800" title="Minimap2">
 </p>
 
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;">
+
+  Note: I will often switch between code used in the Linux terminal or Rstudio. I've put these in black and blue boxes, respectively.
+  
+</div>
+
 ### 2. Input data
   
   For this exercise, you can navigate to http://ensembl.lepbase.org/ and click on the links to the <i>Heliconius erato demophoon</i> (v1) and <i>Heliconius melpomene melpomene</i> (Hmel2) genomes. At the right top, you can search for "optix". The search result will return you the gene model name (e.g. evm.TU.Herato1801.64) and its location (e.g. scaffold 'Herato1801' at position '1239943' to '1251211'). 
