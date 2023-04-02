@@ -40,13 +40,15 @@ The final result should look like this:
   
   ### 3. Minimap2 aligner
   
-  The `-x asm20` option is a preset to optimize alignment of sequences divergent up to 20%. The `--no-long-join -r 200` assures that long gaps aren't ignored for building long alignments and that alignments include no gaps longer than 200 bp. See [here](https://lh3.github.io/minimap2/minimap2.html) for more detailed information on the Minimap2 command. 
+  The `-x asm20` option is a preset to optimize alignment of sequences divergent up to 20%. The `--no-long-join -r 200` option assures that long gaps aren't ignored for building long alignments and that alignments include no gaps longer than 200 bp. See [here](https://lh3.github.io/minimap2/minimap2.html) for more detailed information on the Minimap2 command. 
   
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #d9edf7; border-color: #000000;">
   ````
-  minimap2 -x asm20 Herato1801_1_2000000.fasta Hmel213003_1_2000000.fasta --no-long-join -r 200 | cut -f 1-12 > Minimap_erato_melp.sam
+  minimap2 -x asm20 Hmel213003_1_2000000.fasta Herato1801_1_2000000.fasta --no-long-join -r 200 | cut -f 1-12 > Minimap_erato_melp.sam
   ````
 </div>
+  
+  Note that we have set here `Hmel213003_1_2000000.fasta` as the <strong>target</strong> and `Herato1801_1_2000000.fasta` as the <strong>query</strong> sequence.
   
   ### 4. Visualizations in R
   
