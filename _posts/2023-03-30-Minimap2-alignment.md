@@ -11,7 +11,7 @@ In this tutorial we will align a piece of chromosome of two <i>Heliconius</i> bu
 The final result should look like this:
 
 <p align="center">
-  <img src="../docs/assets/Plot_minimap.png" width="800" title="Minimap2">
+  <img src="/docs/assets/Plot_minimap.png" width="800" title="Minimap2">
 </p>
 
 ### 2. Input data
