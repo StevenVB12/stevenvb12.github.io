@@ -238,7 +238,7 @@ Let's make sure <i>optix</i> is aligned in the center of the plot between the tw
   text(start, 7.5, substitute(paste(italic('H. melpomene'))), pos = 4)
   text(start, 2.5, substitute(paste(italic('H. erato'))), pos = 4)
 
-
+  # Plot the polygons representing the alignments.
   for(e in 1:nrow(miniMap_out)){
 
     polygon(x = c(miniMap_out$targetStart[e]+plotDiff, miniMap_out$targetEnd[e]+plotDiff, miniMap_out$queryEnd[e], miniMap_out$queryStart[e]), 
@@ -252,5 +252,20 @@ Let's make sure <i>optix</i> is aligned in the center of the plot between the tw
 >
 
 
+#### 4.6. Zoom in 
 
+As an exercise we can now try zooming in on 10,000 bp before and 100,000 bp after the start of the <i>optix</i> gene.
+
+But before we do this, let's build a more complex layout of our plot first. The `layout()` function will help us build the panels for a complex figure layout. Here, I build one with 7 rows (`nrows`), each with a different `height`. Everytime we will call the `plot()` function, one panel of this layout will become filled.
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+  
+  ```r
+  layout(matrix(c(1,4,5,3,6,7,2), nrow=7, byrow=TRUE), height = c(0.5,1,1,2,1,1,0.5))
+  layout.show(n=7) # This will visualize our defined layout.
+
+  par(mar = c(0.5,5,0.5,1), xpd = FALSE) # This will set some margin settings which helps creating space for our axes labels.
+  ```
+
+</div>
 
