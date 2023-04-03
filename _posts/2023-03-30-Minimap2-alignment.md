@@ -122,7 +122,7 @@ Now we can switch to Rstudio (but we will be generating some extra input files i
 
 #### 4.3. Plot the first minimap2 match
 
-With the 'rect()` function we can define the genomic intervals/sequences of <i>H. melpomene</i> (deepskyblue), the other <i>H. erato</i> (mediumseagreen).
+First, with the 'rect()` function we can define the genomic intervals/sequences of <i>H. melpomene</i> (deepskyblue), the other <i>H. erato</i> (mediumseagreen).
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
   
@@ -162,7 +162,7 @@ With the 'rect()` function we can define the genomic intervals/sequences of <i>H
 >  <img src="/docs/assets/rect_function_coordinates.png" width="300" title="rect()">
 ></p>
 
-With the `polygon()' function, we can map the alignment connections between the sequences of <i>H. melpomene</i> (target) and <i>H. erato</i> (query).
+Next, with the `polygon()' function, we can map the alignment connections between the sequences of <i>H. melpomene</i> (target) and <i>H. erato</i> (query).
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
   
@@ -170,6 +170,7 @@ With the `polygon()' function, we can map the alignment connections between the 
   polygon(x = c(miniMap_out$targetStart[1], miniMap_out$targetEnd[1], miniMap_out$queryEnd[1], miniMap_out$queryStart[1]), 
         y = c(8,8,2,2),
         col = adjustcolor('black', alpha.f = 0.1), border = FALSE)
+  # Assigning [1] after the vectors extracts only the first element from it. When we plot all the matches, we will loop through these vectors using the variable [e].
   ```
 
 </div>
@@ -179,3 +180,24 @@ With the `polygon()' function, we can map the alignment connections between the 
 > <p align="center">
 >  <img src="/docs/assets/polygon_function_coordinates.png" width="300" title="rect()">
 ></p>
+
+
+#### 4.4. Plot all Minimap2 match
+
+We can replace the last piece of code to plot a single polygon with a loop that goes through each row in the Minimap2 alignment table and plots each match as a polygon.
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+  
+  ```r
+  for(e in 1:nrow(miniMap_out)){
+  
+    polygon(x = c(miniMap_out$targetStart[e], miniMap_out$targetEnd[e], miniMap_out$queryEnd[e], miniMap_out$queryStart[e]), 
+            y = c(8,8,2,2),
+            col = adjustcolor('black', alpha.f = 0.1), border = FALSE)
+  }
+  ```
+
+</div>
+
+
+
