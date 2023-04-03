@@ -71,8 +71,9 @@ The output should look like this (without the column titles as shown here. See [
 | :------------- | :-------- | ------: | ------: | ---: | :------------- | :-------- | ------: | ------: | ------: | ------: | ------: |
 | Herato1801 | 2000000 | 700514 | 710441 | + | Hmel218003 | 1895173 | 228710 | 238849 | 3366 | 10410 | 60 |
 | ... | ... | ...  | ... | ... | ... | ... | ... | ... | ... | ... | ... |
-
   
+Note here that the target length isn't actually 2000000 bp but 1895173 bp. That's because the <i>H. melpomene</i> scaffold Hmel218003 with the <i>optix</i> gene has a length of 1895173 bp only. 
+
 That's it. For me the alignment step took less than a second. Thanks [Heng Li](https://en.wikipedia.org/wiki/Heng_Li)!
   
   
