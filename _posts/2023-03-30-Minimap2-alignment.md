@@ -256,7 +256,7 @@ Let's make sure <i>optix</i> is aligned in the center of the plot between the tw
 
 As an exercise we can now try zooming in on 10,000 bp before and 200,000 bp after the start of the <i>optix</i> gene.
 
-But before we do this, let's build a more complex layout of our plot first. The `layout()` function will help us build the panels for a complex figure layout. Here, I build one with 7 rows (`nrows`), each with a different `height`. Everytime we will call the `plot()` function, one panel of this layout will become filled.
+But before we do this, let's build a more complex layout of our plot first. The `layout()` function will help us build the panels for a complex figure layout. Here, I build one with 7 rows (`nrows`), each with a different `height`. Everytime we will call the `plot()` function, one panel of this layout will become filled. We will use these additional panels to add some tracks with additional genomic annotations in the next steps.
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
   
@@ -304,6 +304,7 @@ Now we can add the alignment polygons for a zoomed-in window to this predefined 
   text(start, 7.5, substitute(paste(italic('H. melpomene'))), pos = 4)
   text(start, 2.5, substitute(paste(italic('H. erato'))), pos = 4)
 
+  # Plot the polygons representing the alignments.
   for(e in 1:nrow(miniMap_out)){
 
     # I add here a filter so that alignments outside of the plotting area don't get included.
@@ -319,3 +320,10 @@ Now we can add the alignment polygons for a zoomed-in window to this predefined 
   mtext('Minimap2 alignment', side = 2, cex=0.8, padj = -1, col = 'black')
   ```
 </div>
+
+Now that we're done with plotting the alignment, we can try adding some additional tracks with genomic information or annotations.
+  
+
+#### 4.7. Add transposable element annotations
+  
+#### 4.8. Add ATAC-seq data tracks
