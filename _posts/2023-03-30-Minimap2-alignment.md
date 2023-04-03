@@ -4,6 +4,15 @@ title: "Minimap2 genome alignment tutorial"
 categories: misc
 ---
 
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;">
+
+  To quickly run the entire code and have all the input files, clone [this](https://github.com/StevenVB12/Tutorial_pan_genomics) repository.
+  
+ ````
+  git clone https://github.com/StevenVB12/Tutorial_pan_genomics
+ ````
+  
+</div>
 
 ### 1. Introduction
 
@@ -102,6 +111,9 @@ Now we can switch to Rstudio (but we will be generating some extra input files i
                  
   # set the column names
   colnames(miniMap_out) <- c('queryName', 'queryLength', 'queryStart', 'queryEnd', 'char', 'targetName', 'targetLength', 'targetStart', 'targetEnd', 'matchingBases', 'matchLength', 'matchQuality')
+  
+  # check the table
+  head(miniMap_out)
   ```
 
 </div>
