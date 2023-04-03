@@ -376,7 +376,15 @@ Add the ATAC-seq data of some butterfly brain and wing tissue. You can download 
 
   melp_5th_brain <- import.bedGraph("ATAC/brain_5th_H_melp_normalized_mean.w30s0bin.bg")
   melp_5th_FW <- import.bedGraph("ATAC/FW_5th_H_melp_normalized_mean.w30s0bin.bg")
+  ```
+  
+</div>
+  
+> The files we are loading are called `bedgraph` files. They simply include a summary of the amount of cut-sites resulting from the ATAC-seq protocol (summarized in intervals that have the same amount of cut sites (e.g. scaffold  start end count)). Note that for bigger datasets we would use `bigwig` files, which is a compressed alternative to the bedgraph format.
 
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+  
+  ```r
   # Sample 1
 
   # Plot an empty plot (remember, this will fill a panel defined by the layout function).
