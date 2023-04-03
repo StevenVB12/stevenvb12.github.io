@@ -47,7 +47,7 @@ For this exercise, you can navigate to http://ensembl.lepbase.org/ and click on 
   
 When you click on the gene model, you can see what genes surround the <i>optix</i> gene. You can also see a botton on the left "Export data". This allows you to export the sequence as a `.fasta` file. Using this, you can try exporting not just the <i>optix</i> gene but a 2,000,000 bp region surrounding it.
 
-You can also find these .fasta files [here](https://github.com/StevenVB12/Tutorial_pan_genomics/tree/main/input).
+You can also find these .fasta files [here](https://github.com/StevenVB12/Tutorial_pan_genomics/tree/main/sequences).
   ````
   # scaffold Herato1801 start 1 end 2000000
   Herato1801_1_2000000.fasta.gz
@@ -66,7 +66,7 @@ For our sequences, we will use Minimap2 as follows:
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
   
   ````
-  minimap2 -x asm20 Hmel213003_1_2000000.fasta Herato1801_1_2000000.fasta --no-long-join -r 200 | cut -f 1-12 > Minimap_erato_melp.sam
+  minimap2 -x asm20 sequences/Hmel213003_1_2000000.fasta sequences/Herato1801_1_2000000.fasta --no-long-join -r 200 | cut -f 1-12 > Minimap_out/Minimap_melp_erato.sam
   ````
 </div>
 
@@ -109,7 +109,7 @@ Now we can switch to Rstudio (but we will be generating some extra input files i
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
   
   ```r
-  miniMap_out <- read.table('Minimap_melp_erato.sam', header = FALSE, sep = '\t')
+  miniMap_out <- read.table('Minimap2_out/Minimap_melp_erato.sam', header = FALSE, sep = '\t')
                  
   # set the column names
   colnames(miniMap_out) <- c('queryName', 'queryLength', 'queryStart', 'queryEnd', 'char', 'targetName', 'targetLength', 'targetStart', 'targetEnd', 'matchingBases', 'matchLength', 'matchQuality')
@@ -318,8 +318,6 @@ Now we can add the alignment polygons for a zoomed-in window to this predefined 
   }
 
   mtext('Minimap2 alignment', side = 2, cex=0.8, padj = -1, col = 'black')
-  
-  <span style="color:blue">some *blue* text</span>.
   ```
 </div>
   
@@ -330,4 +328,99 @@ Now that we're done with plotting the alignment, we can try adding some addition
 
 #### 4.7. Add transposable element annotations
   
+We can plot Transposable Element (TE) annotations on top of this. The TE annotations we will plot are the output of [RepeatModeler](https://www.pnas.org/doi/10.1073/pnas.1921046117). You can download the files [here](https://github.com/StevenVB12/Tutorial_pan_genomics/tree/main/TEs).
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+  
+  ```r
+  # Load the TE tables (only the columns that are relevant to us).
+  TE_erato <- read.table('TEs/H_erato_1801_TE.txt', header = FALSE)[,c(2,5:7)]
+  TE_melp <- read.table('TEs/H_melp_18003_TE.txt', header = FALSE)[,c(2,5:7)]
+
+  # Fix the column names
+  colnames(TE_erato) <- c('subs','scaf', 'start', 'end')
+  colnames(TE_melp) <- c('subs','scaf', 'start', 'end')
+
+  # (optional) remove TEs with large number of substitutions compared to database
+  TE_erato <- subset(TE_erato, TE_erato$subs < 15)
+  TE_melp  <- subset(TE_melp, TE_melp$subs < 15)
+
+  # Loop through the rows and plot each TE as a small orange rectangle.
+
+  for(e in 1:nrow(TE_melp)){
+    rect(TE_melp$start[e]+plotDiff,8.8,TE_melp$end[e]+plotDiff,9, col = 'orange', border = NA)
+  }
+
+  for(e in 1:nrow(TE_erato)){
+    rect(TE_erato$start[e],1,TE_erato$end[e],1.2, col = 'orange', border = NA)
+  }
+
+  # Add a little text note on the plot
+  mtext('TE', side = 1, cex=0.8, padj = -3, las = 1, adj=1, col = 'orange')
+  ```
+
+</div>
+  
+  
 #### 4.8. Add ATAC-seq data tracks
+
+Add the ATAC-seq data of some butterfly brain and wing tissue. You can download the files [here](https://github.com/StevenVB12/Tutorial_pan_genomics/tree/main/ATAC).
+  
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+  
+  ```r
+  # Load the ATAC-seq data (make sure the 'rtracklayer' is loaded).
+
+  erato_5th_brain <- import.bedGraph("ATAC/brain_5th_H_erato_normalized_mean.w30s0bin.bg")
+  erato_5th_FW <- import.bedGraph("ATAC/FW_5th_H_erato_normalized_mean.w30s0bin.bg")
+
+  melp_5th_brain <- import.bedGraph("ATAC/brain_5th_H_melp_normalized_mean.w30s0bin.bg")
+  melp_5th_FW <- import.bedGraph("ATAC/FW_5th_H_melp_normalized_mean.w30s0bin.bg")
+
+  # Sample 1
+
+  # Plot an empty plot (remember, this will fill a panel defined by the layout function).
+  plot(NULL, xlim=c(start,end), ylim = c(0,200), axes=FALSE, ann=FALSE)
+  # Tell R the next plot call will be to the one that is already there and not initiate a new one.
+  par(new = TRUE)
+  # Plot the ATAC-seq track.
+  plot(0.5*(start(melp_5th_brain) + end(melp_5th_brain))+plotDiff, melp_5th_brain$score, type='l', xlim = c(start,end), ylim = c(0,200), ylab = "", yaxt = "n", lwd = 1, xlab = "", xaxt = "n", main = "", bty='none', col = "black")
+
+  # Add some text specifying the stage and tissue of the sample.
+  mtext('ATAC-seq 5th instar brain', side = 1, cex=0.8, padj = 0, las = 1, adj=1)
+  # Add the y-axis labels
+  axis(2, at = seq(0,200, by=50), line = 1)
+  mtext('Score', side = 2, cex=0.8, line = 3)
+
+  # Sample 2
+
+  plot(NULL, xlim=c(start,end), ylim = c(0,200), axes=FALSE, ann=FALSE)
+  par(new = TRUE)
+  plot(0.5*(start(melp_5th_FW) + end(melp_5th_FW))+plotDiff, melp_5th_FW$score, type='l', xlim = c(start,end), ylim = c(0,200), ylab = "", yaxt = "n", lwd = 1, xlab = "", xaxt = "n", main = "", bty='none', col = "black")
+
+  mtext('ATAC-seq 5th instar FW', side = 1, cex=0.8, padj = 0, las = 1, adj=1)
+  axis(2, at = seq(0,200, by=50), line = 1)
+  mtext('Score', side = 2, cex=0.8, line = 3)
+
+  # Sample 3
+
+  plot(NULL, xlim=c(start,end), ylim = c(0,200), axes=FALSE, ann=FALSE)
+  par(new = TRUE)
+  plot(0.5*(start(erato_5th_brain) + end(erato_5th_brain)), erato_5th_brain$score, type='l', xlim = c(start,end), ylim = c(0,200), ylab = "", yaxt = "n", lwd = 1, xlab = "", xaxt = "n", main = "", bty='none', col = "black")
+
+  mtext('ATAC-seq 5th instar brain', side = 1, cex=0.8, padj = 0, las = 1, adj=1)
+  axis(2, at = seq(0,200, by=50), line = 1)
+  mtext('Score', side = 2, cex=0.8, line = 3)
+
+  # Sample 4
+
+  plot(NULL, xlim=c(start,end), ylim = c(0,200), axes=FALSE, ann=FALSE)
+  par(new = TRUE)
+  plot(0.5*(start(erato_5th_FW) + end(erato_5th_FW)), erato_5th_FW$score, type='l', xlim = c(start,end), ylim = c(0,200), ylab = "", yaxt = "n", lwd = 1, xlab = "", xaxt = "n", main = "", bty='none', col = "black")
+
+  mtext('ATAC-seq 5th instar FW', side = 1, cex=0.8, padj = 0, las = 1, adj=1)
+  axis(2, at = seq(0,200, by=50), line = 1)
+  mtext('Score', side = 2, cex=0.8, line = 3)
+  ```
+
+</div>
