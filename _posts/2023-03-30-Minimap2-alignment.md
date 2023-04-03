@@ -12,7 +12,7 @@ categories: misc
   git clone https://github.com/StevenVB12/Tutorial_pan_genomics
  ````
   
-  To make sure you have everything installed and setup, check [here](/_posts/2023-03-30-Installation-notes.md).
+  To make sure you have everything installed and setup, check [here](https://stevenvb12.github.io/2023/03/30/Installation-notes.html).
   
 </div>
 
