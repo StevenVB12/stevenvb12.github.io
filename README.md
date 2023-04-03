@@ -12,7 +12,7 @@ In this tutorial I guide you through code for a [Minimmap2](https://academic.oup
 
 [Go to PAN genome alignment tutorial](PAN_genomics)
 
-
+It should be possible to extend these codes to work for entire chromosomes or genomes and using more than two populations or species!
 
 Similar code has been used to create figures in:
 
