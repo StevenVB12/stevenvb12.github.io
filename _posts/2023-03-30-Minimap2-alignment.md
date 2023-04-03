@@ -48,7 +48,7 @@ You can also find these .fasta files [here](https://github.com/StevenVB12/Tutori
   
 ### 3. Minimap2 aligner
 
-We can use [Minimap2](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778) to align the sequences in the fasta files. Minimap2 is intended to efficiently map error prone long-read sequences (e.g. from nanopore or Pacbio sequencing) to a reference but it also works well for pairwise alignment of whole chromosomes and genomes. 
+We can use [Minimap2](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778) to align the sequences in the fasta files. Minimap2 is intended to efficiently map error prone long-read sequences to a reference (e.g. from nanopore or Pacbio sequencing) but it also works well for pairwise alignment of whole chromosomes and genomes. 
 
 For our sequences, we will use Minimap2 as follows:
 
@@ -78,15 +78,32 @@ That's it. For me the alignment step took less than a second. Thanks [Heng Li](h
   
   
 ### 4. Visualizations in R
-  
+
+Now we can switch to Rstudio (but we will be generating some extra input files in Linux throughout the pipeline).
+
+#### 4.1. Set you working directory:
+
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
   
   ```r
-  # First set you working directory.
-  # (You can also use the '...' under the 'File' tab on the right of Rstudio 
-  # to navigate to your folder then click 'More' > 'Set as working directory')
-
   setwd("G:/My Drive/Workshop_pan_genomics_12042023")
   ```
 
 </div>
+
+(You can also use the '...' under the 'File' tab on the right of Rstudio to navigate to your folder then click 'More' > 'Set as working directory'.
+
+#### 4.2. Load the Minimap2 output:
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+  
+  ```r
+  miniMap_out <- read.table('Minimap_melp_erato.sam', header = FALSE, sep = '\t')
+                 
+  # set the column names
+  colnames(miniMap_out) <- c('queryName', 'queryLength', 'queryStart', 'queryEnd', 'char', 'targetName', 'targetLength', 'targetStart', 'targetEnd', 'matchingBases', 'matchLength', 'matchQuality')
+  ```
+
+</div>
+
+
