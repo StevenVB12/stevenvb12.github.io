@@ -120,4 +120,36 @@ Now we can switch to Rstudio (but we will be generating some extra input files i
 
 </div>
 
+#### 4.3. Plot the first minimap2 match
 
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+  
+  ```r
+  # First define x-axis coordinates. This will help us later define the genomic window (xlim) we want to zoom in on.
+  start = 0
+  end = 3000000
+
+  # Plot an empty plot (so we can fill it with rectangles (~genome) and polygons (~alignments)).
+  # For the y-axis (ylim) coordinates I arbitrarily use c(0,10).
+  plot(NULL, xlim = c(start, end), ylim = c(0,10), axes=F, ylab = '', xlab = '')
+
+  # Now we can draw two simple rectangles, one will define the genomic interval/sequence of H. melpomene (deepskyblue), the other H. erato (mediumseagreen).
+  rect(0,8,2000000,9, col = 'deepskyblue', border = NA)
+  rect(0,1,2000000,2, col = 'mediumseagreen', border = NA)
+
+  # We also know the positions of the optix gene and we can add these with the same rect() function trick.
+  rect(705604,9,706407,10, col = 'red', border = 'red') # position optix melpomene (only has one exon)
+
+  rect(1239943,0,1239972,1, col = 'red', border = 'red') # first exon position optix erato
+  rect(1250591,0,1251211,1, col = 'red', border = 'red') # second exon position optix erato
+  rect(1239943,0.5,1251211,0.5, col = 'red', border = 'red') # A little line between the two and we have a gene model!
+
+  # With the text function, we can add the gene and species names at the appropriate coordinates.
+  text(706407, 9.5, substitute(paste(italic('optix'))), pos = 4)
+  text(1251211, 9.5, substitute(paste(italic('optix'))), pos = 4)
+
+  text(start, 7.5, substitute(paste(italic('H. melpomene'))), pos = 4)
+  text(start, 2.5, substitute(paste(italic('H. erato'))), pos = 4)
+  ```
+
+</div>
