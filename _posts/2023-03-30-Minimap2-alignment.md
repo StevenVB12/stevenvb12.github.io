@@ -254,7 +254,7 @@ Let's make sure <i>optix</i> is aligned in the center of the plot between the tw
 
 #### 4.6. Zoom in 
 
-As an exercise we can now try zooming in on 10,000 bp before and 100,000 bp after the start of the <i>optix</i> gene.
+As an exercise we can now try zooming in on 10,000 bp before and 200,000 bp after the start of the <i>optix</i> gene.
 
 But before we do this, let's build a more complex layout of our plot first. The `layout()` function will help us build the panels for a complex figure layout. Here, I build one with 7 rows (`nrows`), each with a different `height`. Everytime we will call the `plot()` function, one panel of this layout will become filled.
 
@@ -269,3 +269,53 @@ But before we do this, let's build a more complex layout of our plot first. The 
 
 </div>
 
+Now we can add the alignment polygons for a zoomed-in window to this predefined layout. We'll also add an `if()` statements that makes sure alignments outside of the plotting area don't get included.
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+  
+  ```r
+  # Define the interval (relative to the H. erato genome)
+  start = 1239943 - 10000
+  end = 1251211 + 200000
+
+  # Calculate the offset between the positions of optix in the two fasta sequences.
+  # We will use this to modify all the x-axes coordinates for H. melpomene.
+  plotDiff = 1251211 - 706407
+
+  # Plot an empty plot (so we can fill it with rectangles (~genome) and polygons (~alignments)).
+  # For the y-axis (ylim) coordinates I arbitrarily use c(0,10).
+  plot(NULL, xlim = c(start, end), ylim = c(0,10), axes=F, ylab = '', xlab = '')
+
+  # Now we can draw two simple rectangles, one will define the genomic interval/sequence of H. melpomene (deepskyblue), the other H. erato (mediumseagreen).
+  rect(0+plotDiff,8,2000000+plotDiff,9, col = 'deepskyblue', border = NA)
+  rect(0,1,2000000,2, col = 'mediumseagreen', border = NA)
+
+  # We also know the positions of the optix gene and we can add these with the same rect() function trick.
+  rect(705604+plotDiff,9,706407+plotDiff,10, col = 'red', border = 'red') # position optix melpomene (only has one exon)
+
+  rect(1239943,0,1239972,1, col = 'red', border = 'red') # first exon position optix erato
+  rect(1250591,0,1251211,1, col = 'red', border = 'red') # second exon position optix erato
+  rect(1239943,0.5,1251211,0.5, col = 'red', border = 'red') # A little line between the two and we have a gene model!
+
+  # With the text function, we can add the gene and species names at the appropriate coordinates.
+  text(706407+plotDiff, 9.5, substitute(paste(italic('optix'))), pos = 4)
+  text(1251211, 9.5, substitute(paste(italic('optix'))), pos = 4)
+
+  text(start, 7.5, substitute(paste(italic('H. melpomene'))), pos = 4)
+  text(start, 2.5, substitute(paste(italic('H. erato'))), pos = 4)
+
+  for(e in 1:nrow(miniMap_out)){
+
+    # I add here a filter so that alignments outside of the plotting area don't get included.
+    if(miniMap_out$targetStart[e]+plotDiff > start & miniMap_out$targetEnd[e]+plotDiff < end & miniMap_out$queryStart[e] > start & miniMap_out$queryEnd[e] < end){
+
+      polygon(x = c(miniMap_out$targetStart[e]+plotDiff, miniMap_out$targetEnd[e]+plotDiff, miniMap_out$queryEnd[e], miniMap_out$queryStart[e]), 
+            y = c(8,8,2,2),
+            col = adjustcolor('black', alpha.f = miniMap_out$matchingBases[e]/miniMap_out$matchLength[e]), border = FALSE)
+
+    }
+  }
+
+  mtext('Minimap2 alignment', side = 2, cex=0.8, padj = -1, col = 'black')
+  ```
+</div>
