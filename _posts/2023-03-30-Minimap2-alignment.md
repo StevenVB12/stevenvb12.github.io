@@ -318,8 +318,12 @@ Now we can add the alignment polygons for a zoomed-in window to this predefined 
   }
 
   mtext('Minimap2 alignment', side = 2, cex=0.8, padj = -1, col = 'black')
+  
+  <span style="color:blue">some *blue* text</span>.
   ```
 </div>
+  
+> The `alpha.f` value in the `adjustcolor()` function has been set here to the identity value of the alignment (i.e. (number of matching bases)/(alignment length)).
 
 Now that we're done with plotting the alignment, we can try adding some additional tracks with genomic information or annotations.
   
