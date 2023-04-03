@@ -199,5 +199,58 @@ We can replace the last piece of code to plot a single polygon with a loop that 
 
 </div>
 
+> The `adjustcolor()` function allows to give colors some `alpha.f` transparency.
+
+#### 4.5. Modify relative alignment
+
+Let's make sure <i>optix</i> is aligned in the center of the plot between the two species. We can do this by calculating the offset of the optix positions in both fasta sequences and adjusting the coordinates in one of the two species' sequences.
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+  
+  ```r
+  # First define x-axis coordinates. This will help us later define the genomic window (xlim) we want to zoom in on.
+  start = 0
+  end = 3000000
+
+  # Calculate the offset between the positions of optix in the two fasta sequences.
+  # We will use this to modify all the x-axes coordinates for H. melpomene.
+  plotDiff = 1251211 - 706407
+
+  # Plot an empty plot (so we can fill it with rectangles (~genome) and polygons (~alignments)).
+  # For the y-axis (ylim) coordinates I arbitrarily use c(0,10).
+  plot(NULL, xlim = c(start, end), ylim = c(0,10), axes=F, ylab = '', xlab = '')
+
+  # Now we can draw two simple rectangles, one will define the genomic interval/sequence of H. melpomene (deepskyblue), the other H. erato (mediumseagreen).
+  rect(0+plotDiff,8,2000000+plotDiff,9, col = 'deepskyblue', border = NA)
+  rect(0,1,2000000,2, col = 'mediumseagreen', border = NA)
+
+  # We also know the positions of the optix gene and we can add these with the same rect() function trick.
+  rect(705604+plotDiff,9,706407+plotDiff,10, col = 'red', border = 'red') # position optix melpomene (only has one exon)
+
+  rect(1239943,0,1239972,1, col = 'red', border = 'red') # first exon position optix erato
+  rect(1250591,0,1251211,1, col = 'red', border = 'red') # second exon position optix erato
+  rect(1239943,0.5,1251211,0.5, col = 'red', border = 'red') # A little line between the two and we have a gene model!
+
+  # With the text function, we can add the gene and species names at the appropriate coordinates.
+  text(706407+plotDiff, 9.5, substitute(paste(italic('optix'))), pos = 4)
+  text(1251211, 9.5, substitute(paste(italic('optix'))), pos = 4)
+
+  text(start, 7.5, substitute(paste(italic('H. melpomene'))), pos = 4)
+  text(start, 2.5, substitute(paste(italic('H. erato'))), pos = 4)
+
+
+  for(e in 1:nrow(miniMap_out)){
+
+    polygon(x = c(miniMap_out$targetStart[e]+plotDiff, miniMap_out$targetEnd[e]+plotDiff, miniMap_out$queryEnd[e], miniMap_out$queryStart[e]), 
+            y = c(8,8,2,2),
+            col = adjustcolor('black', alpha.f = 0.1), border = FALSE)
+  }
+  ```
+
+</div>
+
+>
+
+
 
 
