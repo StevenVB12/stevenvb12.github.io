@@ -182,7 +182,7 @@ Next, with the `polygon()' function, we can map the alignment connections betwee
 ></p>
 
 
-#### 4.4. Plot all Minimap2 match
+#### 4.4. Plot all Minimap2 matches
 
 We can replace the last piece of code to plot a single polygon with a loop that goes through each row in the Minimap2 alignment table and plots each match as a polygon.
 
