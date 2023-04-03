@@ -153,3 +153,5 @@ Now we can switch to Rstudio (but we will be generating some extra input files i
   ```
 
 </div>
+
+> The `rect()` function simply takes two sets of coordinates `x1,y1,x2,y2` that define a rectangle. With `col` and `border` you can set the fill and border colors. For plots with many fine-scale rectangles (see later), I usually remove the border to improve details.
