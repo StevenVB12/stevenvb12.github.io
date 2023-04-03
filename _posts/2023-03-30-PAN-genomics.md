@@ -12,6 +12,8 @@ categories: misc
   git clone https://github.com/StevenVB12/Tutorial_pan_genomics
  ````
   
+  To make sure you have everything installed and setup, check [here](https://stevenvb12.github.io/2023/03/30/Installation-notes.html).
+  
 </div>
 
 ### 1. Introduction
