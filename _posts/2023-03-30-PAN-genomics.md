@@ -85,12 +85,12 @@ For our sequences, we will use seq-seq-pan as follows:
 
 Seq-seq-pan will output several files. Two will be relevenat for us here:
 
-* The `_consensus.fasta` file includes a complete fasta sequence of the consensus pan genome (stitching all non-homologous sequences into the assembly and taking the allele that is most frequent among the multiple aligned genomes).
-* The `.xmfa` file includes a list of the locally collinear blocks (LCBs).
-  * `> 1:` sequence identifier of the first genome in the `genome_list.txt` file.
-  * `> 2:` sequence identifier of the second genome in the `genome_list.txt` file. (and so on)
-  * `=` demarks separate LCBs.
-  * `-` gaps in the aligned LCBs.
+> * The `_consensus.fasta` file includes a complete fasta sequence of the consensus pan genome (stitching all non-homologous sequences into the assembly and taking the allele that is most frequent among the multiple aligned genomes). This consensus file demarks the <strong>coordinate</strong> space of the pan genome and will be used when we want to map any positions in the original genomes (e.g. TE positions) to the pan genome.
+> * The `.xmfa` file includes a list of the locally collinear blocks (LCBs). We will use this file to identify the sequences that are homologous or species-specific.
+> * `> 1:` sequence identifier of the first genome in the `genome_list.txt` file.
+> * `> 2:` sequence identifier of the second genome in the `genome_list.txt` file. (and so on)
+> * `=` demarks separate LCBs.
+> * `-` gaps in the aligned LCBs.
 
 
 We're done! You should now see the figure that was at the top of this tutorial.
