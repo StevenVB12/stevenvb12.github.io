@@ -122,7 +122,7 @@ Now we can switch to Rstudio (but we will be generating some extra input files i
 
 #### 4.3. Plot the first minimap2 match
 
-First, with the 'rect()` function we can define the genomic intervals/sequences of <i>H. melpomene</i> (deepskyblue), the other <i>H. erato</i> (mediumseagreen).
+First, with the `rect()` function we can define the genomic intervals/sequences of <i>H. melpomene</i> (deepskyblue), the other <i>H. erato</i> (mediumseagreen).
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
   
@@ -203,7 +203,7 @@ We can replace the last piece of code to plot a single polygon with a loop that 
 
 #### 4.5. Modify relative alignment
 
-Let's make sure <i>optix</i> is aligned in the center of the plot between the two species. We can do this by calculating the offset of the optix positions in both fasta sequences and adjusting the coordinates in one of the two species' sequences.
+Let's make sure <i>optix</i> is aligned at the center of the plot between the two species. We can do this by calculating the offset of the <i>optix</i> positions in both fasta sequences and adjusting the coordinates in one of the two species' sequences.
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
   
@@ -249,14 +249,12 @@ Let's make sure <i>optix</i> is aligned in the center of the plot between the tw
 
 </div>
 
->
-
 
 #### 4.6. Zoom in 
 
 As an exercise we can now try zooming in on 10,000 bp before and 200,000 bp after the start of the <i>optix</i> gene.
 
-But before we do this, let's build a more complex layout of our plot first. The `layout()` function will help us build the panels for a complex figure layout. Here, I build one with 7 rows (`nrows`), each with a different `height`. Everytime we will call the `plot()` function, one panel of this layout will become filled. We will use these additional panels to add some tracks with additional genomic annotations in the next steps.
+But before we do this, let's build a more complex layout of our plot first. The `layout()` function will help us building the panels for a complex figure layout. Here, I build one with 7 rows (`nrows`), each with a different `height`. Everytime we will call the `plot()` function, one panel of this layout will become filled in the order as specified in the `matrix()`. We will use these additional panels to add some tracks with additional genomic annotations in the next steps. More information on the layout() function can be found [here](https://r-graph-gallery.com/75-split-screen-with-layout.html).
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
   
@@ -269,7 +267,7 @@ But before we do this, let's build a more complex layout of our plot first. The 
 
 </div>
 
-Now we can add the alignment polygons for a zoomed-in window to this predefined layout. We'll also add an `if()` statements that makes sure alignments outside of the plotting area don't get included.
+Now we can add the alignment polygons for a zoomed-in window to the predefined layout. We'll also add an `if()` statement that makes sure alignments outside of the plotting area don't get included.
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
   
@@ -322,6 +320,8 @@ Now we can add the alignment polygons for a zoomed-in window to this predefined 
 </div>
   
 > The `alpha.f` value in the `adjustcolor()` function has been set here to the identity value of the alignment (i.e. (number of matching bases)/(alignment length)).
+> 
+> With the `start` and `end` variable you can now zoom in on any part of the aligned.
 
 Now that we're done with plotting the alignment, we can try adding some additional tracks with genomic information or annotations.
   
@@ -380,7 +380,7 @@ Add the ATAC-seq data of some butterfly brain and wing tissue. You can download 
   
 </div>
   
-> The files we are loading are called `bedgraph` files. They simply include a summary of the amount of cut-sites resulting from the ATAC-seq protocol (summarized in intervals that have the same amount of cut sites (e.g. scaffold  start end count)). Note that for bigger datasets we would use `bigwig` files, which is a compressed alternative to the bedgraph format.
+> The files we are loading are called `bedgraph` files. They simply include a summary of the amount of cut-sites resulting from the ATAC-seq protocol (summarized in intervals that have the same amount of cut sites (e.g. | scaffold | start | end | count |)). Note that for bigger datasets we would use `bigwig` files, which is a compressed alternative to the bedgraph format.
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
   
