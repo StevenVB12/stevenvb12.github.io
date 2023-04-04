@@ -42,8 +42,46 @@ The final result should look like this:
 </div>
 
 
+### 2. Input data
+
+(This is the same as in the [Minimap2 genome alignment tutorial](https://stevenvb12.github.io/misc/2023/03/30/Minimap2-alignment.html))
+
+For this exercise, you can navigate to http://ensembl.lepbase.org/ and click on the links to the <i>Heliconius erato demophoon</i> (v1) and <i>Heliconius melpomene melpomene</i> (Hmel2) genome assemblies. At the right top, you can search for "optix". The search result will return you the gene model name (e.g. evm.TU.Herato1801.64) and its location (e.g. scaffold 'Herato1801' at position '1239943' to '1251211'). 
+  
+  ````
+  # optix H. erato
+  Herato1801:1239943-1251211
+
+  # optix H. melpomene
+  Hmel218003:705604-706407
+  ````
+  
+When you click on the gene model, you can see what genes surround the <i>optix</i> gene. You can also see a botton on the left "Export data". This allows you to export the sequence as a `.fasta` file. Using this, you can try exporting not just the <i>optix</i> gene but a 2,000,000 bp region surrounding it.
+
+You can also find these .fasta files [here](https://github.com/StevenVB12/Tutorial_pan_genomics/tree/main/sequences).
+  ````
+  # scaffold Herato1801 start 1 end 2000000
+  Herato1801_1_2000000.fasta.gz
+
+  # scaffold Hmel213003 start 1 end 2000000
+  Hmel213003_1_2000000.fasta.gz
+  ````
 
 
+### 3. seq-seq-pan aligner
+
+We can use [seq-seq-pan](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-017-4401-3) to assemble the sequences in the fasta files into a pan genome. Seq-seq-pan extends the functionality of the multiple genome aligner [progressiveMauve](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2892488/) by constructing a composite consensus or pan-genome that includes both homologous sequences or locally collinear blocks (LCBs) as well as lineage-specific (non-homologous) sequences in each of the genomes. This pan-genome is then used as the reference coordinates space for the multi genome alignment, which includes sequences specific to any of the genomes.
+
+For our sequences, we will use seq-seq-pan as follows:
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
+  
+  ````
+  seq-seq-pan-wga --config genomefile=genome_list.txt outfilename=SeqSeqPan_erato_melp_optix
+  ````
+</div>
+
+> The `genome_list.txt` file includes a list (one per line) of the fasta sequences to be included in the pan genome assembly. The file can be downloaded [here](https://github.com/StevenVB12/Tutorial_pan_genomics/blob/main/genome_list.txt).
 
 
 We're done! You should now see the figure that was at the top of this tutorial.
