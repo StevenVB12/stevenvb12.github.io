@@ -390,7 +390,7 @@ Here we will use R to read in the ATAC-seq bedgraphs and create the input files 
   
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;">
 
-  Note: For bigger files, you could also use the script `seq-seq-pan_bedgraph_chrompos.py` provide [here](https://github.com/StevenVB12/Tutorial_pan_genomics/blob/main/seq-seq-pan_bedgraph_chrompos.py) which extracts the columns of the bedgrap file. The script also takes a chromosome position file which is able to generate cummulative chromosome positions. This is because seq-seq-pan generates the pan genome as a single string/chromosome when provided multiple chromosomes.
+  Note: For bigger files, you could also use the script `seq-seq-pan_bedgraph_chrompos.py` provided [here](https://github.com/StevenVB12/Tutorial_pan_genomics/blob/main/seq-seq-pan_bedgraph_chrompos.py) which extracts the columns of the bedgrap file. The script also takes a chromosome position file which is able to generate cummulative chromosome positions. This is because seq-seq-pan generates the pan genome as a single string/chromosome when provided multiple chromosomes.
   
 </div>  
   
@@ -592,7 +592,7 @@ Let's now do the same for the Minimap2 alignment and the TE annotations.
   # Read in the Minimap2 alignment file
   miniMap_out <- read.table('Minimap2_out/Minimap_melp_erato.sam', header = FALSE, sep = '\t')
 
-  # set the column names
+  # Set the column names
   colnames(miniMap_out) <- c('queryName', 'queryLength', 'queryStart', 'queryEnd', 
                              'char', 
                              'targetName', 'targetLength', 'targetStart', 'targetEnd', 
