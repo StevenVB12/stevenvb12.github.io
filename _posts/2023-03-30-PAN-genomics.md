@@ -61,10 +61,10 @@ When you click on the gene model, you can see what genes surround the <i>optix</
 You can also find these .fasta files [here](https://github.com/StevenVB12/Tutorial_pan_genomics/tree/main/sequences).
   ````
   # scaffold Herato1801 start 1 end 2000000
-  Herato1801_1_2000000.fasta.gz
+  sequences/Herato1801_1_2000000.fasta
 
   # scaffold Hmel213003 start 1 end 2000000
-  Hmel213003_1_2000000.fasta.gz
+  sequences/Hmel213003_1_2000000.fasta
   ````
 
 
@@ -77,8 +77,9 @@ For our sequences, we will use seq-seq-pan as follows:
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
   
   ````
-  seq-seq-pan-wga --config genomefile=genome_list.txt outfilename=SeqSeqPan_erato_melp_optix
+  seq-seq-pan-wga --config genomefile=genome_list.txt outfilename=seq-seq-pan_out/SeqSeqPan_erato_melp_optix
   ````
+  
 </div>
 
 > The `genome_list.txt` file includes a list (one per line) of the fasta sequences to be included in the pan genome assembly. The file can be downloaded [here](https://github.com/StevenVB12/Tutorial_pan_genomics/blob/main/genome_list.txt).
@@ -91,6 +92,88 @@ Seq-seq-pan will output several files. Two will be relevenat for us here:
 > * `> 2:` sequence identifier of the second genome in the `genome_list.txt` file. (and so on)
 > * `=` demarks separate LCBs.
 > * `-` gaps in the aligned LCBs.
+
+That's it, we have a pan genome!
+
+### 4. Shared and unique sequences
+
+We can now try to identify what parts of the sequences is identified as homologous or species-specific in the pan genome. We will use a custom Python script for this, available [here](https://github.com/StevenVB12/Tutorial_pan_genomics/blob/main/seq-seq-pan_blocks_intervals.py).
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
+  
+  ````
+  # For the Python script to work, we first need to remove newlines (enters) in the file from lines that include the sequence. This can be done with this perl oneliner:
+  perl -pe 'chomp if /^[ATCGNSBDHVMRWYK-]/' seq-seq-pan_out/SeqSeqPan_erato_melp_optix.xmfa| sed 's/\=/\n\=/g' | sed 's/>/\n>/g' | sed '/^$/d'  >       seq-seq-pan_out/SeqSeqPan_erato_melp_optix.noNewline.xmfa
+
+  # Now we can run the python script ('-g 1,2' is a list of the genome identifiers in the order of the genomes_list.txt file):
+  python seq-seq-pan_blocks_intervals.py -I seq-seq-pan_out/SeqSeqPan_erato_melp_optix.noNewline.xmfa -g 1,2
+  
+  # The script annoyingly produces a 'TAB' at the end of each line which would break bedtools in the next step. We can remove that as follows:
+  sed -i 's/[[:space:]]*$//' seq-seq-pan_out/1_blocks_intervals.bed 
+  sed -i 's/[[:space:]]*$//' seq-seq-pan_out/2_blocks_intervals.bed 
+  ````
+  
+</div>
+
+> The output are files with `| chromosome | start | end |` positions of sequences in each genome but in the coordinate space of the pan genome (hence, a new line is generate when teh sequence is interrupted by a species-specific sequence in another genome). Such a format with start and end positions is typically called a `.bed` file format.
+
+Next, we can use [bedtools](https://bedtools.readthedocs.io/en/latest/content/tools/intersect.html) to subtract these files and get the unique sequences in each genome. 
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
+  
+  ````
+  bedtools subtract -sorted -a 1_blocks_intervals.bed -b 2_blocks_intervals.bed > blocks_unique_1.bed
+  bedtools subtract -sorted -b 1_blocks_intervals.bed -a 2_blocks_intervals.bed > blocks_unique_2.bed
+  ````
+  
+</div>
+
+We also have a custom Python scripts to calculate sequence identity within the LCBs, available [here](https://github.com/StevenVB12/Tutorial_pan_genomics/blob/main/seq-seq-pan_bedfile_conservation.py).
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
+  
+  ````
+  # First, we need to transform the .xmfa file to a .fasta alignment
+  python seq-seq-pan_toFasta.py -I seq-seq-pan_out/SeqSeqPan_erato_melp_optix.noNewline.xmfa -g 1,2
+  cat genome* > seq-seq-pan_out/SeqSeqPan_erato_melp_optix.fasta
+  
+  # Next, we need to find the sequences that are shared between genomes. We can do this with bedtools intersect.
+  bedtools intersect -sorted -a seq-seq-pan_out/1_blocks_intervals.bed -b seq-seq-pan_out/2_blocks_intervals.bed > seq-seq-pan_out/blocks_shared_1_2.bed
+  
+  # Finally, we can calculate the conservation. This will output a .bed like file with identity scores for each shared interval.
+  python seq-seq-pan_bedfile_conservation.py -I seq-seq-pan_out/SeqSeqPan_erato_melp_optix.fasta -g 1,2 -b seq-seq-pan_out/blocks_shared_1_2.bed -o seq-seq-pan_out/conservation_shared_1_2.bed
+  ````
+  
+</div>
+
+### 5. Mapping annotations to the pan genome
+
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i optix_Hmel2.toMap.txt -n optix_Hmel2.toMap.pan
+
+### 6. Visualizations in R
+
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i erato_5th_brain_start.toMap.txt -n erato_5th_brain_start.pan
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i erato_5th_brain_end.toMap.txt -n erato_5th_brain_end.pan
+
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i erato_5th_FW_start.toMap.txt -n erato_5th_FW_start.pan
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i erato_5th_FW_end.toMap.txt -n erato_5th_FW_end.pan
+
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i melp_5th_brain_start.toMap.txt -n melp_5th_brain_start.pan
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i melp_5th_brain_end.toMap.txt -n melp_5th_brain_end.pan
+
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i melp_5th_FW_start.toMap.txt -n melp_5th_FW_start.pan
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i melp_5th_FW_end.toMap.txt -n melp_5th_FW_end.pan
+
+
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i miniMap_target_start.toMap.txt -n miniMap_target_start.pan
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i miniMap_target_end.toMap.txt -n miniMap_target_end.pan
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i miniMap_query_start.toMap.txt -n miniMap_query_start.pan
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i miniMap_query_end.toMap.txt -n miniMap_query_end.pan
+
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i TE_erato_start.toMap.txt -n TE_erato_start.pan
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i TE_erato_end.toMap.txt -n TE_erato_end.pan
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i TE_melp_start.toMap.txt -n TE_melp_start.pan
+seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i TE_melp_end.toMap.txt -n TE_melp_end.pan
 
 
 We're done! You should now see the figure that was at the top of this tutorial.
