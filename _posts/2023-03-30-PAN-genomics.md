@@ -336,7 +336,9 @@ We should have the [tranformed positions of the <i>optix</i> gene](https://githu
 ##### 6.5.1. Create ATAC-seq mapping files
   
 Here we will use R to read in the ATAC-seq bedgraphs and create the input files for the seq-seq-pan `map` function. The transformed positions will in a later step be merged with the ATAC-seq read count data in the original files.
-  
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+    
   ```r
   # Read in the ATAC-seq bedgraph files.
   erato_5th_brain <- import.bedGraph("ATAC/brain_5th_H_erato_normalized_mean.w30s0bin.bg")
@@ -345,7 +347,7 @@ Here we will use R to read in the ATAC-seq bedgraphs and create the input files 
   melp_5th_brain <- import.bedGraph("brain_5th_H_melp_normalized_mean.w30s0bin.bg")
   melp_5th_FW <- import.bedGraph("ATAC/FW_5th_H_melp_normalized_mean.w30s0bin.bg")
 
-  # extract the start and end position of the bedgraph files.
+  # Extract the start and end position of the bedgraph files.
   erato_5th_brain_start <- as.data.frame(start(erato_5th_brain))
   erato_5th_brain_end <- as.data.frame(end(erato_5th_brain))
 
@@ -384,6 +386,7 @@ Here we will use R to read in the ATAC-seq bedgraphs and create the input files 
   write.table(melp_5th_FW_start, "ATAC/melp_5th_FW_start.toMap.txt", quote = FALSE, row.names = FALSE)
   write.table(melp_5th_FW_end, "ATAC/melp_5th_FW_end.toMap.txt", quote = FALSE, row.names = FALSE)
   ```
+</div>
   
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;">
 
@@ -391,32 +394,367 @@ Here we will use R to read in the ATAC-seq bedgraphs and create the input files 
   
 </div>  
   
+##### 6.5.2. Transform the ATAC-seq positions
   
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
   
+  ````sh
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i ATAC/erato_5th_brain_start.toMap.txt -n ATAC/erato_5th_brain_start.pan
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i ATAC/erato_5th_brain_end.toMap.txt -n ATAC/erato_5th_brain_end.pan
+
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i ATAC/erato_5th_FW_start.toMap.txt -n ATAC/erato_5th_FW_start.pan
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i ATAC/erato_5th_FW_end.toMap.txt -n ATAC/erato_5th_FW_end.pan
+
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i ATAC/melp_5th_brain_start.toMap.txt -n ATAC/melp_5th_brain_start.pan
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i ATAC/melp_5th_brain_end.toMap.txt -n ATAC/melp_5th_brain_end.pan
+
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i ATAC/melp_5th_FW_start.toMap.txt -n ATAC/melp_5th_FW_start.pan
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i ATAC/melp_5th_FW_end.toMap.txt -n ATAC/melp_5th_FW_end.pan
+  ````
   
+</div>  
   
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i erato_5th_brain_start.toMap.txt -n erato_5th_brain_start.pan
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i erato_5th_brain_end.toMap.txt -n erato_5th_brain_end.pan
+##### 6.5.3. Read and plot the transformed ATAC positions
 
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i erato_5th_FW_start.toMap.txt -n erato_5th_FW_start.pan
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i erato_5th_FW_end.toMap.txt -n erato_5th_FW_end.pan
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+    
+  ```r
+  erato_5th_brain_panPos_start <- read.table('ATAC/erato_5th_brain_start.pan.txt', header = TRUE, sep = '\t')
+  erato_5th_brain_panPos_end <- read.table('ATAC/erato_5th_brain_end.pan.txt', header = TRUE, sep = '\t')
 
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i melp_5th_brain_start.toMap.txt -n melp_5th_brain_start.pan
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i melp_5th_brain_end.toMap.txt -n melp_5th_brain_end.pan
+  erato_5th_FW_panPos_start <- read.table('ATAC/erato_5th_FW_start.pan.txt', header = TRUE, sep = '\t')
+  erato_5th_FW_panPos_end <- read.table('ATAC/erato_5th_FW_end.pan.txt', header = TRUE, sep = '\t')
 
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i melp_5th_FW_start.toMap.txt -n melp_5th_FW_start.pan
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i melp_5th_FW_end.toMap.txt -n melp_5th_FW_end.pan
+  melp_5th_brain_panPos_start <- read.table('ATAC/melp_5th_brain_start.pan.txt', header = TRUE, sep = '\t')
+  melp_5th_brain_panPos_end <- read.table('ATAC/melp_5th_brain_end.pan.txt', header = TRUE, sep = '\t')
+
+  melp_5th_FW_panPos_start <- read.table('ATAC/melp_5th_FW_start.pan.txt', header = TRUE, sep = '\t')
+  melp_5th_FW_panPos_end <- read.table('ATAC/melp_5th_FW_end.pan.txt', header = TRUE, sep = '\t')
+
+  # Merge the old with the newly transformed positions.
+  erato_5th_brain_PAN <- cbind(as.data.frame(erato_5th_brain), erato_5th_brain_panPos_start[,2], erato_5th_brain_panPos_end[,2])
+  erato_5th_FW_PAN    <- cbind(as.data.frame(erato_5th_FW), erato_5th_FW_panPos_start[,2], erato_5th_FW_panPos_end[,2])
+  melp_5th_brain_PAN  <- cbind(as.data.frame(melp_5th_brain), melp_5th_brain_panPos_start[,2], melp_5th_brain_panPos_end[,2])
+  melp_5th_FW_PAN     <- cbind(as.data.frame(melp_5th_FW), melp_5th_FW_panPos_start[,2], melp_5th_FW_panPos_end[,2])
+
+  # Add readable column names.
+  colnames(erato_5th_brain_PAN) <- c('seqnames', 'start', 'end', 'width', 'strand', 'score' , 'panStart', 'panEnd')
+  colnames(erato_5th_FW_PAN)    <- c('seqnames', 'start', 'end', 'width', 'strand', 'score' , 'panStart', 'panEnd')
+  colnames(melp_5th_brain_PAN)  <- c('seqnames', 'start', 'end', 'width', 'strand', 'score' , 'panStart', 'panEnd')
+  colnames(melp_5th_FW_PAN)     <- c('seqnames', 'start', 'end', 'width', 'strand', 'score' , 'panStart', 'panEnd')
+
+  # Remove potential erroneous mappings which can be identified as start/end positions too far apart.
+  erato_5th_brain_PAN <- subset(erato_5th_brain_PAN, abs(erato_5th_brain_PAN$panEnd - erato_5th_brain_PAN$panStart) < 10000)
+  erato_5th_FW_PAN <- subset(erato_5th_FW_PAN, abs(erato_5th_FW_PAN$panEnd - erato_5th_FW_PAN$panStart) < 10000)
+  melp_5th_brain_PAN <- subset(melp_5th_brain_PAN, abs(melp_5th_brain_PAN$panEnd - melp_5th_brain_PAN$panStart) < 1000)
+  melp_5th_FW_PAN <- subset(melp_5th_FW_PAN, abs(melp_5th_FW_PAN$panEnd - melp_5th_FW_PAN$panStart) < 1000)
+
+  # Sort the tables (this is needed because when plotting lines x coordinates have to be ordered)
+  erato_5th_brain_PAN <- erato_5th_brain_PAN[order(erato_5th_brain_PAN$panStart),]
+  erato_5th_FW_PAN    <- erato_5th_FW_PAN[order(erato_5th_FW_PAN$panStart),]
+  melp_5th_brain_PAN <- melp_5th_brain_PAN[order(melp_5th_brain_PAN$panStart),]
+  melp_5th_FW_PAN    <- melp_5th_FW_PAN[order(melp_5th_FW_PAN$panStart),]
+
+  ## Finally, let's start plotting the ATAC-seq tracks
+
+  ## Plot H. melpomene brain
+  plot(NULL, xlim=c(start,end), ylim = c(0,200), axes=FALSE, ann=FALSE)
+
+  # Add some shading for unique blocks under the plot
+  for(e in 1: nrow(unique_melp)){
+    rect(unique_melp$startPos[e],0,unique_melp$endPos[e],200, col = adjustcolor('deepskyblue',alpha.f = 0.15), border = NA)
+  }
+
+  # Plot ATAC-seq track
+  par(new = TRUE)
+  plot(0.5*(melp_5th_brain_PAN$panStart + melp_5th_brain_PAN$panEnd), melp_5th_brain_PAN$score, type='l', xlim = c(start,end), ylim = c(0,200), ylab = "", yaxt = "n", lwd = 1, xlab = "", xaxt = "n", main = "", bty='none', col = "black")
+
+  # Add labels
+  mtext('ATAC-seq 5th instar Brain', side = 1, cex=0.8, padj = 0, las = 1, adj=1)
+  axis(2, at = seq(0,200, by=50), line = 1)
+  mtext('Score', side = 2, cex=0.8, line = 3)
+
+  ## Plot H. melpomene Forewing
+  plot(NULL, xlim=c(start,end), ylim = c(0,200), axes=FALSE, ann=FALSE)
+
+  # Add some shading for unique blocks under the plot
+  for(e in 1: nrow(unique_melp)){
+    rect(unique_melp$startPos[e],0,unique_melp$endPos[e],200, col = adjustcolor('deepskyblue',alpha.f = 0.15), border = NA)
+  }
+
+  # Plot ATAC-seq track
+  par(new = TRUE)
+  plot(0.5*(melp_5th_FW_PAN$panStart + melp_5th_FW_PAN$panEnd), melp_5th_FW_PAN$score, type='l', xlim = c(start,end), ylim = c(0,200), ylab = "", yaxt = "n", lwd = 1, xlab = "", xaxt = "n", main = "", bty='none', col = "black")
+
+  # Add labels
+  mtext('ATAC-seq 5th instar FW', side = 1, cex=0.8, padj = 0, las = 1, adj=1)
+  axis(2, at = seq(0,200, by=50), line = 1)
+  mtext('Score', side = 2, cex=0.8, line = 3)
+
+  ## Plot H. erato brain
+  plot(NULL, xlim=c(start,end), ylim = c(0,200), axes=FALSE, ann=FALSE)
+
+  # Add some shading for unique blocks under the plot
+  for(e in 1: nrow(unique_erato)){
+    rect(unique_erato$startPos[e],0,unique_erato$endPos[e],200, col = adjustcolor('mediumseagreen',alpha.f = 0.15), border = NA)
+  }
+
+  # Plot ATAC-seq track
+  par(new = TRUE)
+  plot(0.5*(erato_5th_brain_PAN$panStart + erato_5th_brain_PAN$panEnd), erato_5th_brain_PAN$score, type='l', xlim = c(start,end), ylim = c(0,200), ylab = "", yaxt = "n", lwd = 1, xlab = "", xaxt = "n", main = "", bty='none', col = "black")
+
+  # Add labels
+  mtext('ATAC-seq 5th instar Brain', side = 1, cex=0.8, padj = 0, las = 1, adj=1)
+  axis(2, at = seq(0,200, by=50), line = 1)
+  mtext('Score', side = 2, cex=0.8, line = 3)
+
+  ## Plot H. erato FW
+  plot(NULL, xlim=c(start,end), ylim = c(0,200), axes=FALSE, ann=FALSE)
+
+  # Add some shading for unique blocks under the plot
+  for(e in 1: nrow(unique_erato)){
+    rect(unique_erato$startPos[e],0,unique_erato$endPos[e],200, col = adjustcolor('mediumseagreen',alpha.f = 0.15), border = NA)
+  }
+
+  # Plot ATAC-seq track
+  par(new = TRUE)
+  plot(0.5*(erato_5th_FW_PAN$panStart + erato_5th_FW_PAN$panEnd), erato_5th_FW_PAN$score, type='l', xlim = c(start,end), ylim = c(0,200), ylab = "", yaxt = "n", lwd = 1, xlab = "", xaxt = "n", main = "", bty='none', col = "black")
+
+  # Add labels
+  mtext('ATAC-seq 5th instar FW', side = 1, cex=0.8, padj = 0, las = 1, adj=1)
+  axis(2, at = seq(0,200, by=50), line = 1)
+  mtext('Score', side = 2, cex=0.8, line = 3)
+  ```
+
+  </div> 
+
+Let's now do the same for the Minimap2 alignment and the TE annotations.
+
+  
+#### 6.6. Map the Minimap2 alignment to the pan genome and plot 
+  
+##### 6.6.1. Create Minimap2 mapping files
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+  
+  ```r
+  # Read in the Minimap2 alignment file
+  miniMap_out <- read.table('Minimap2_out/Minimap_melp_erato.sam', header = FALSE, sep = '\t')
+
+  # Set the column names
+  colnames(miniMap_out) <- c('queryName', 'queryLength', 'queryStart', 'queryEnd', 
+                             'char', 
+                             'targetName', 'targetLength', 'targetStart', 'targetEnd', 
+                             'matchingBases', 'matchLength', 'matchQuality')
+
+  # Extract the start and end position of the Minimap2 alignments.
+  miniMap_target_start <- as.data.frame(miniMap_out$targetStart)
+  miniMap_target_end <- as.data.frame(miniMap_out$targetEnd)
+
+  miniMap_query_start <- as.data.frame(miniMap_out$queryStart)
+  miniMap_query_end <- as.data.frame(miniMap_out$queryEnd)
+
+  # Add the first row which specifies the transform direction.
+  colnames(miniMap_target_start) <- paste("2\tc")
+  colnames(miniMap_target_end) <- paste("2\tc")
+
+  colnames(miniMap_query_start) <- paste("1\tc")
+  colnames(miniMap_query_end) <- paste("1\tc")
+
+  # Write the objects to files.
+  write.table(miniMap_target_start, "miniMap_target_start.toMap.txt", quote = FALSE, row.names = FALSE)
+  write.table(miniMap_target_end, "miniMap_target_end.toMap.txt", quote = FALSE, row.names = FALSE)
+
+  write.table(miniMap_query_start, "miniMap_query_start.toMap.txt", quote = FALSE, row.names = FALSE)
+  write.table(miniMap_query_end, "miniMap_query_end.toMap.txt", quote = FALSE, row.names = FALSE)
+  ```
+
+</div> 
+  
+##### 6.6.2. Transform the Minimap2 positions
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
+  
+  ````sh
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i Minimap2_out/miniMap_target_start.toMap.txt -n Minimap2_out/miniMap_target_start.pan
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i Minimap2_out/miniMap_target_end.toMap.txt -n Minimap2_out/miniMap_target_end.pan
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i Minimap2_out/miniMap_query_start.toMap.txt -n Minimap2_out/miniMap_query_start.pan
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i Minimap2_out/miniMap_query_end.toMap.txt -n Minimap2_out/miniMap_query_end.pan
+  ````
+  
+</div>  
+  
+##### 6.6.3. Read and plot the transformed Minimap2 positions
+  
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+  
+  ```r
+  # Read in the Minimap2 alignment file
+  miniMap_out <- read.table('Minimap2_out/Minimap_melp_erato.sam', header = FALSE, sep = '\t')
+
+  # set the column names
+  colnames(miniMap_out) <- c('queryName', 'queryLength', 'queryStart', 'queryEnd', 
+                             'char', 
+                             'targetName', 'targetLength', 'targetStart', 'targetEnd', 
+                             'matchingBases', 'matchLength', 'matchQuality')
+
+  # Extract the start and end position of the Minimap2 alignments.
+  miniMap_target_start <- as.data.frame(miniMap_out$targetStart)
+  miniMap_target_end <- as.data.frame(miniMap_out$targetEnd)
+
+  miniMap_query_start <- as.data.frame(miniMap_out$queryStart)
+  miniMap_query_end <- as.data.frame(miniMap_out$queryEnd)
+
+  # Add the first row which specifies the transform direction.
+  colnames(miniMap_target_start) <- paste("2\tc")
+  colnames(miniMap_target_end) <- paste("2\tc")
+
+  colnames(miniMap_query_start) <- paste("1\tc")
+  colnames(miniMap_query_end) <- paste("1\tc")
+
+  # Write the objects to files.
+  write.table(miniMap_target_start, "Minimap2_out/miniMap_target_start.toMap.txt", quote = FALSE, row.names = FALSE)
+  write.table(miniMap_target_end, "Minimap2_out/miniMap_target_end.toMap.txt", quote = FALSE, row.names = FALSE)
+
+  write.table(miniMap_query_start, "Minimap2_out/miniMap_query_start.toMap.txt", quote = FALSE, row.names = FALSE)
+  write.table(miniMap_query_end, "Minimap2_out/miniMap_query_end.toMap.txt", quote = FALSE, row.names = FALSE)
+
+  # 6.6.2. Transform the Minimap2 positions
+
+  # 6.6.3. Read and plot the transformed Minimap2 positions
+
+  miniMap_target_panPos_start <- read.table('Minimap2_out/miniMap_target_start.pan.txt', header = TRUE, sep = '\t')
+  miniMap_target_panPos_end   <- read.table('Minimap2_out/miniMap_target_end.pan.txt', header = TRUE, sep = '\t')
+
+  miniMap_query_panPos_start  <- read.table('Minimap2_out/miniMap_query_start.pan.txt', header = TRUE, sep = '\t')
+  miniMap_query_panPos_end    <- read.table('Minimap2_out/miniMap_query_end.pan.txt', header = TRUE, sep = '\t')
+
+  colnames(miniMap_target_panPos_start) <- c("targetStart", "targetStartPAN")
+  colnames(miniMap_target_panPos_end) <- c("targetEnd", "targetEndPAN")
+
+  colnames(miniMap_query_panPos_start) <- c("queryStart", "queryStartPAN")
+  colnames(miniMap_query_panPos_end) <- c("queryEnd", "queryEndPAN")
+
+  # Merge the old with the newly transformed positions. In contrast to the bedgraphs, I here merge using the old position in the Minimap2 file, because the order of the alignment positions might be out of order between the two genomes. 
+  miniMap_outPAN <- merge(miniMap_out,    miniMap_target_panPos_start, by = 'targetStart')
+  miniMap_outPAN <- merge(miniMap_outPAN, miniMap_target_panPos_end,   by = 'targetEnd')
+  miniMap_outPAN <- merge(miniMap_outPAN, miniMap_query_panPos_start,  by = 'queryStart')
+  miniMap_outPAN <- merge(miniMap_outPAN, miniMap_query_panPos_end,    by = 'queryEnd')
+
+  # Plot the alignment.
+  plot(NULL, xlim = c(start, end), ylim = c(0,10), axes=F, ylab = '', xlab = '')
+
+  for(e in 1:nrow(miniMap_outPAN)){
+
+    if(miniMap_outPAN$targetStartPAN[e] > start-20000 & miniMap_outPAN$targetEndPAN[e] < end+20000 & miniMap_outPAN$queryStartPAN[e] > start-20000 & miniMap_outPAN$queryEndPAN[e] < end+20000){
+
+      # if(miniMap_outPAN$matchingBases[e]/miniMap_outPAN$matchLength[e] > 0.2){
+      polygon(x = c(miniMap_outPAN$targetStartPAN[e], miniMap_outPAN$targetEndPAN[e], miniMap_outPAN$queryEndPAN[e], miniMap_outPAN$queryStartPAN[e]),
+              y = c(10,10,0,0),
+              col = adjustcolor('black', alpha.f = miniMap_outPAN$matchingBases[e]/miniMap_outPAN$matchLength[e]), border = FALSE)
+      # }
+    }
+  }
+  ```
+
+</div> 
 
 
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i miniMap_target_start.toMap.txt -n miniMap_target_start.pan
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i miniMap_target_end.toMap.txt -n miniMap_target_end.pan
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i miniMap_query_start.toMap.txt -n miniMap_query_start.pan
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i miniMap_query_end.toMap.txt -n miniMap_query_end.pan
+#### 6.7. Map the TEs to the pan genome and plot 
+  
+##### 6.7.1. Create TE mapping files
 
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i TE_erato_start.toMap.txt -n TE_erato_start.pan
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i TE_erato_end.toMap.txt -n TE_erato_end.pan
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i TE_melp_start.toMap.txt -n TE_melp_start.pan
-seq-seq-pan map -c SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i TE_melp_end.toMap.txt -n TE_melp_end.pan
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+  
+  ```r
+  # Read in the TE files
+  TE_erato <- read.table('TEs/H_erato_1801_TE.txt', header = FALSE)[,c(2,5:7)]
+  TE_melp <- read.table('TEs/H_melp_18003_TE.txt', header = FALSE)[,c(2,5:7)]
 
+  # Set the column names
+  colnames(TE_erato) <- c('subs','scaf', 'start', 'end')
+  colnames(TE_melp) <- c('subs','scaf', 'start', 'end')
 
-We're done! You should now see the figure that was at the top of this tutorial.
+  # The files include TEs outside of the interval we are interested in, so we can remove those.
+  TE_erato <- subset(TE_erato, TE_erato$end < 2000000)
+  TE_melp <- subset(TE_melp, TE_melp$end < 2000000)
+
+  # (optional) remove TEs with large number of substitutions compared to database
+  TE_erato <- subset(TE_erato, TE_erato$subs < 15)
+  TE_melp  <- subset(TE_melp, TE_melp$subs < 15)
+
+  # Extract the start and end position of the TEs.
+  TE_erato_start <- as.data.frame(TE_erato[,3])
+  TE_erato_end <- as.data.frame(TE_erato[,4])
+
+  TE_melp_start <- as.data.frame(TE_melp[,3])
+  TE_melp_end <- as.data.frame(TE_melp[,4])
+
+  # Add the first row which specifies the transform direction.
+  colnames(TE_erato_start) <- paste("1\tc")
+  colnames(TE_erato_end) <- paste("1\tc")
+
+  colnames(TE_melp_start) <- paste("2\tc")
+  colnames(TE_melp_end) <- paste("2\tc")
+
+  # Write the objects to files.
+  write.table(TE_erato_start, "TE_erato_start.toMap.txt", quote = FALSE, row.names = FALSE)
+  write.table(TE_erato_end, "TE_erato_end.toMap.txt", quote = FALSE, row.names = FALSE)
+
+  write.table(TE_melp_start, "TE_melp_start.toMap.txt", quote = FALSE, row.names = FALSE)
+  write.table(TE_melp_end, "TE_melp_end.toMap.txt", quote = FALSE, row.names = FALSE)
+  ```
+
+</div> 
+  
+##### 6.7.2. Transform the TE positions
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
+  
+  ````sh
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i TEs/TE_erato_start.toMap.txt -n TEs/TE_erato_start.pan
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i TEs/TE_erato_end.toMap.txt -n TEs/TE_erato_end.pan
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i TEs/TE_melp_start.toMap.txt -n TEs/TE_melp_start.pan
+  seq-seq-pan map -c seq-seq-pan_out/SeqSeqPan_erato_melp_optix_consensus.fasta -p ./ -i TEs/TE_melp_end.toMap.txt -n TEs/TE_melp_end.pan
+  ````
+  
+</div>  
+  
+##### 6.7.3. Read and plot the transformed TE positions
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+  
+  ```r
+  TE_erato_panPos_start <- read.table('TEs/TE_erato_start.pan.txt', header = TRUE, sep = '\t')
+  TE_erato_panPos_end <- read.table('TEs/TE_erato_end.pan.txt', header = TRUE, sep = '\t')
+
+  TE_melp_panPos_start <- read.table('TEs/TE_melp_start.pan.txt', header = TRUE, sep = '\t')
+  TE_melp_panPos_end <- read.table('TEs/TE_melp_end.pan.txt', header = TRUE, sep = '\t')
+
+  TE_erato_PAN <- cbind(as.data.frame(TE_erato_panPos_start[,2]),as.data.frame(TE_erato_panPos_end[,2]))
+  TE_melp_PAN  <- cbind(as.data.frame(TE_melp_panPos_start[,2]),as.data.frame(TE_melp_panPos_end[,2]))
+
+  colnames(TE_erato_PAN) <- c('startPAN', 'endPAN')
+  colnames(TE_melp_PAN)  <- c('startPAN', 'endPAN')
+
+  # Remove potential erroneous mappings which can be identified as start/end positions too far apart.
+  TE_erato_PAN <- subset(TE_erato_PAN, abs(TE_erato_PAN$endPAN - TE_erato_PAN$startPAN) < 10000)
+  TE_melp_PAN  <- subset(TE_melp_PAN, abs(TE_melp_PAN$endPAN - TE_melp_PAN$startPAN) < 10000)
+
+  # Add the TEs to the current plot as rectangles
+  for(e in 1:nrow(TE_erato_PAN)){
+    rect(TE_erato_PAN$startPAN[e],-1,TE_erato_PAN$endPAN[e],0, col = 'orange', border = NA)
+  }
+
+  for(e in 1:nrow(TE_melp_PAN)){
+    rect(TE_melp_PAN$startPAN[e],10,TE_melp_PAN$endPAN[e],11, col = 'orange', border = NA)
+  }
+
+  # Add some labels
+  mtext('TE', side = 1, cex=0.5, padj = 0, las = 1, adj=1, col = 'orange')
+  mtext('Minimap2 alignment', side = 2, cex=0.8, padj = -1, col = 'black')
+  ```
+
+</div> 
+
+Pfieuw. We're done! You should now see the figure that was at the top of this tutorial.
