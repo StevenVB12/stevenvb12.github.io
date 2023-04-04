@@ -76,7 +76,7 @@ For our sequences, we will use seq-seq-pan as follows:
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
   
-  ````csharp
+  ````properties
   seq-seq-pan-wga --config genomefile=genome_list.txt outfilename=seq-seq-pan_out/SeqSeqPan_erato_melp_optix
   ````
   
@@ -101,7 +101,7 @@ We can now try to identify what parts of the sequences is identified as homologo
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
   
-  ````csharp
+  ````properties
   # For the Python script to work, we first need to remove newlines (enters) in the file from lines that include the sequence. This can be done with this perl oneliner:
   perl -pe 'chomp if /^[ATCGNSBDHVMRWYK-]/' seq-seq-pan_out/SeqSeqPan_erato_melp_optix.xmfa| sed 's/\=/\n\=/g' | sed 's/>/\n>/g' | sed '/^$/d' > seq-seq-pan_out/SeqSeqPan_erato_melp_optix.noNewline.xmfa
 
@@ -121,7 +121,7 @@ Next, we can use [bedtools](https://bedtools.readthedocs.io/en/latest/content/to
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
   
-  ````csharp
+  ````properties
   bedtools subtract -sorted -a 1_blocks_intervals.bed -b 2_blocks_intervals.bed > blocks_unique_1.bed
   bedtools subtract -sorted -b 1_blocks_intervals.bed -a 2_blocks_intervals.bed > blocks_unique_2.bed
   ````
@@ -132,7 +132,7 @@ We also have a custom Python scripts to calculate sequence identity within the L
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
   
-  ````csharp
+  ````properties
   # First, we need to transform the .xmfa file to a .fasta alignment
   python seq-seq-pan_toFasta.py -I seq-seq-pan_out/SeqSeqPan_erato_melp_optix.noNewline.xmfa -g 1,2
   cat genome* > seq-seq-pan_out/SeqSeqPan_erato_melp_optix.fasta
