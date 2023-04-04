@@ -97,9 +97,9 @@ That's it. For me the alignment step took less than a second. Thanks [Heng Li](h
   
 ### 4. Visualizations in R
 
-Now we can switch to Rstudio (but we will be generating some extra input files in Linux throughout the pipeline).
+Now we can switch to Rstudio.
 
-#### 4.1. Set you working directory:
+#### 4.1. Set you working directory
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
   
@@ -111,7 +111,7 @@ Now we can switch to Rstudio (but we will be generating some extra input files i
 
 (You can also use the '...' under the 'File' tab on the right of Rstudio to navigate to your folder then click 'More' > 'Set as working directory'.
 
-#### 4.2. Load the Minimap2 output:
+#### 4.2. Load the Minimap2 output
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
   
