@@ -366,7 +366,7 @@ We can plot Transposable Element (TE) annotations on top of this. The TE annotat
 
 As a last step, we will add some ATAC-seq data of butterfly brain and wing tissue. You can download the files [here](https://github.com/StevenVB12/Tutorial_pan_genomics/tree/main/ATAC).
   
-> ATAC-seq (Assay for Transposase-Accessible Chromatin using sequencing) is a technique used to identify regions of chromatin that are accessible to DNA-binding proteins in a genome-wide manner. It works by using a hyperactive Tn5 transposase enzyme to insert sequencing adapters into accessible chromatin regions, which are subsequently amplified and sequenced. By comparing the resulting sequencing reads to a reference genome, we can identify regions of open chromatin and infer potential regulatory elements, such as promoters and enhancers, in a given tissue and developmental stage.
+> [ATAC-seq](https://emea.illumina.com/techniques/popular-applications/epigenetics/atac-seq-chromatin-accessibility.html) (Assay for Transposase-Accessible Chromatin using sequencing) is a technique used to identify regions of chromatin that are accessible to DNA-binding proteins in a genome-wide manner. It works by using a hyperactive Tn5 transposase enzyme to insert sequencing adapters into accessible chromatin regions, which are subsequently amplified and sequenced. By comparing the resulting sequencing reads to a reference genome, we can identify regions of open chromatin and infer potential regulatory elements, such as promoters and enhancers, in a given tissue and developmental stage.
 >
 > <p align="center">
 >  <img src="/docs/assets/ATAC-seq.png" width="400" title="rect()">
