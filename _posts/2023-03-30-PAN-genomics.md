@@ -8,7 +8,7 @@ categories: misc
 
   To quickly run the entire code and have all the input files, clone [this](https://github.com/StevenVB12/Tutorial_pan_genomics) repository.
   
- ````properties
+ ````sh
   git clone https://github.com/StevenVB12/Tutorial_pan_genomics
  ````
   
@@ -76,7 +76,7 @@ For our sequences, we will use seq-seq-pan as follows:
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
   
-  ````properties
+  ````sh
   seq-seq-pan-wga --config genomefile=genome_list.txt outfilename=seq-seq-pan_out/SeqSeqPan_erato_melp_optix
   ````
   
