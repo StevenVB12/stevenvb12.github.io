@@ -8,7 +8,7 @@ categories: misc
 
   To quickly run the entire code and have all the input files, clone [this](https://github.com/StevenVB12/Tutorial_pan_genomics) repository.
   
- ````
+ ````properties
   git clone https://github.com/StevenVB12/Tutorial_pan_genomics
  ````
   
