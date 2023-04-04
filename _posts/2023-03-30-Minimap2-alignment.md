@@ -57,10 +57,10 @@ When you click on the gene model, you can see what genes surround the <i>optix</
 You can also find these .fasta files [here](https://github.com/StevenVB12/Tutorial_pan_genomics/tree/main/sequences).
   ````
   # scaffold Herato1801 start 1 end 2000000
-  Herato1801_1_2000000.fasta.gz
+  sequences/Herato1801_1_2000000.fasta
 
   # scaffold Hmel213003 start 1 end 2000000
-  Hmel213003_1_2000000.fasta.gz
+  sequences/Hmel213003_1_2000000.fasta
   ````
   
   
