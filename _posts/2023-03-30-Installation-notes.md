@@ -41,6 +41,7 @@ categories: misc
 * Close and reopen the shell.
 
 > Conda is an open-source package management system and environment management system for installing and managing software packages and dependencies in various programming languages, including Python. It allows users to create and manage isolated environments with specific package versions to avoid conflicts between dependencies.
+
 > Miniconda is a minimalistic version of the Anaconda (conda + Python/R) distribution. It includes only the essential components needed for creating a Python environment.
 
 ### 3. Install seq-seq-pan
