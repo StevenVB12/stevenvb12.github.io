@@ -43,13 +43,13 @@ categories: misc
 
 ### 4. Install Minimap2
 
-  `````sh
+  ````sh
   conda install minimap2
   ````
   
 ### 5. Install bedtools
 
-  `````sh
+  ````sh
   conda install bedtools
   ````
 
