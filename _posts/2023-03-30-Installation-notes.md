@@ -51,12 +51,7 @@ categories: misc
 
 ### 3. Install seq-seq-pan 
 
-<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #FFE3DD; border-color: #000000;">
-
-  Sorry, this doesn't work on Mac (unix), but you can dowload the outputs of the program [here](https://github.com/StevenVB12/Tutorial_pan_genomics/tree/main/seq-seq-pan_out).
-  
-</div>
-
+#### Windows:
 
 * First, add the correct conda channel to find the software:
 
@@ -78,13 +73,34 @@ categories: misc
   ````
   Note that all subsequent programs will also be installed in the `ssp` environment. When you restart you terminal, you will need to reactivate it to run the programs.
 
+#### Mac:
+
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #FFE3DD; border-color: #000000;">
+
+  Sorry, due to a malfunctioning of the 'progressiveMauve' program the alignment step of seq-seq-pan doesn't work on Mac (unix), but you can dowload the outputs of the program [here](https://github.com/StevenVB12/Tutorial_pan_genomics/tree/main/seq-seq-pan_out).
+  
+</div>
+
+To have the other functionalities of seq-seq-pan do the following:
+
+* If you don't have git installed, check [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+* Clone the seq-seq-pan repository
+  ````sh
+  git clone https://gitlab.com/chrjan/seq-seq-pan.git
+  cd seq-seq-pan
+  chmod u+x seq-seq-pan*
+  
+  # Add seq-seq-pan to path so it is recognized as an executable from anywhere
+  export PATH=/PathToFolder/seq-seq-pan/:$PATH
+  ````
+
 ### 4. Install Minimap2
 
-Windows:
+#### Windows:
   ````sh
   conda install minimap2
   ````
-Mac:
+#### Mac:
   ````sh
   conda install "bioconda/label/cf201901" minimap2
   ````
