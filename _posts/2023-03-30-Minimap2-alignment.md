@@ -273,7 +273,7 @@ But before we do this, let's build a more complex layout of our plot first. The 
   
   # Plot the title of the plot
   plot(NULL, xlim=c(start,end), ylim = c(0,1), axes=FALSE, ann=FALSE)
-  mtext('PAN genome plot', side = 1, cex=1, col = 'black', line =-1)
+  mtext('Minimap2 aligned genome plot', side = 1, cex=1, col = 'black', line =-1)
 
   # Plot the x-axis as a separate plot
   plot(NULL, xlim=c(start,end), ylim = c(0,1), axes=FALSE, ann=FALSE)
