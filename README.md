@@ -8,11 +8,11 @@ In this tutorial I guide you through code for a [Minimap2](https://academic.oup.
 </p>
 
 
-1. [Check the required installations](/_posts/installation-notes)
+1. [Check the required installations](_posts/installation-notes)
 
-2. [Go to Minimap2 alignment tutorial](/_posts/Minimap2_alignment)
+2. [Go to Minimap2 alignment tutorial](_posts/Minimap2_alignment)
 
-3. [Go to PAN genome alignment tutorial](/_posts/PAN_genomics)
+3. [Go to PAN genome alignment tutorial](_posts/PAN_genomics)
 
 > It is possible to extend these codes to work for entire chromosomes or genomes and using more than two populations or species!
 
