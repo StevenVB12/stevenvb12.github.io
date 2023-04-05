@@ -76,7 +76,7 @@ categories: misc
   # update the snakemake version
   conda update -c conda-forge -c bioconda snakemake
   ````
-  Note that all subsequent programs will also be installed in the `spp` environment. When you restart you terminal, you will need to reactivate it to run the programs.
+  Note that all subsequent programs will also be installed in the `ssp` environment. When you restart you terminal, you will need to reactivate it to run the programs.
 
 ### 4. Install Minimap2
 
