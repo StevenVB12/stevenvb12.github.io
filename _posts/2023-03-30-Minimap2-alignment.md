@@ -302,8 +302,8 @@ Now we can add the alignment polygons for a zoomed-in window to the predefined l
   plot(NULL, xlim = c(start, end), ylim = c(0,10), axes=F, ylab = '', xlab = '')
 
   # Now we can draw two simple rectangles, one will define the genomic interval/sequence of H. melpomene (deepskyblue), the other H. erato (mediumseagreen).
-  rect(0+plotDiff,8,2000000+plotDiff,9, col = 'deepskyblue', border = NA)
-  rect(0,1,2000000,2, col = 'mediumseagreen', border = NA)
+  rect(0+plotDiff,8,2000000+plotDiff,8.8, col = 'deepskyblue', border = NA)
+  rect(0,1.2,2000000,2, col = 'mediumseagreen', border = NA)
 
   # We also know the positions of the optix gene and we can add these with the same rect() function trick.
   rect(705604+plotDiff,9,706407+plotDiff,10, col = 'red', border = 'red') # position optix melpomene (only has one exon)
