@@ -1,6 +1,6 @@
 # Pan genomics tutorial
 
-In this tutorial I guide you through code for a [Minimmap2](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778) genome alignment and a [seq-seq-pan](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-017-4401-3) pan-genome alignment with visualizations in R. The tutorial uses an example of two haplotypes of the <i>optix</i> locus in <i>Heliconius</i> butterflies and will build these figures:
+In this tutorial I guide you through code for a [Minimap2](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778) genome alignment and a [seq-seq-pan](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-017-4401-3) pan-genome alignment with visualizations in R. The tutorial uses an example of two haplotypes of the <i>optix</i> locus in <i>Heliconius</i> butterflies and will build these figures:
 
 <p align="center">
   <img src="docs/assets/Plot_minimap.png" width="350" title="Minimap2">
