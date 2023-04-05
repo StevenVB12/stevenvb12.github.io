@@ -177,7 +177,7 @@ Next, with the `polygon()' function, we can map the alignment connections betwee
   polygon(x = c(miniMap_out$targetStart[1], miniMap_out$targetEnd[1], miniMap_out$queryEnd[1], miniMap_out$queryStart[1]), 
         y = c(8,8,2,2),
         col = adjustcolor('black', alpha.f = 0.1), border = FALSE)
-  # Assigning [1] after the vectors extracts only the first element from it. When we plot all the matches, we will loop through these vectors using the variable [e].
+  # Assigning [1] behind the vectors extracts only the first element from it. When we plot all the matches, we will loop through these vectors using the variable [e].
   ```
 
 </div>
