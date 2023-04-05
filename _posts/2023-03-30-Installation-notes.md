@@ -51,7 +51,7 @@ categories: misc
 
 ### 3. Install seq-seq-pan 
 
-<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #FFE3DD; background-color: #FFE3DD; border-color: #d6e9c6;">
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #FFE3DD; border-color: #000000;">
 
   Sorry, this doesn't work on Mac (unix), but you can dowload the outputs of the program [here](https://github.com/StevenVB12/Tutorial_pan_genomics/tree/main/seq-seq-pan_out).
   
