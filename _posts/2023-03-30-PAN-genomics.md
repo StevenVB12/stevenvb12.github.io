@@ -344,7 +344,7 @@ Here we will use R to read in the ATAC-seq bedgraphs and create the input files 
   erato_5th_brain <- import.bedGraph("ATAC/brain_5th_H_erato_normalized_mean.w30s0bin.bg")
   erato_5th_FW <- import.bedGraph("ATAC/FW_5th_H_erato_normalized_mean.w30s0bin.bg")
 
-  melp_5th_brain <- import.bedGraph("brain_5th_H_melp_normalized_mean.w30s0bin.bg")
+  melp_5th_brain <- import.bedGraph("ATAC/brain_5th_H_melp_normalized_mean.w30s0bin.bg")
   melp_5th_FW <- import.bedGraph("ATAC/FW_5th_H_melp_normalized_mean.w30s0bin.bg")
 
   # Extract the start and end position of the bedgraph files.
