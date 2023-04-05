@@ -26,6 +26,11 @@ categories: misc
   ````
   Press Y when prompted.
   
+* To navigate to, for example, my google drive folder in Linux on windows, I do the following:
+  ````sh
+  cd /mnt/g/My Drive/Workshop_pan_genomics_12042023
+  ````
+  
 ### 2. Install Miniconda
 
 > Conda is an open-source package management system and environment management system for installing and managing software packages and dependencies in various programming languages, including Python. It allows users to create and manage isolated environments with specific package versions to avoid conflicts between dependencies.
@@ -64,6 +69,7 @@ categories: misc
   # update the snakemake version
   conda update -c conda-forge -c bioconda snakemake
   ````
+  Note that all subsequent programs will also be installed in the `spp` environment. When you restart you terminal, you will need to reactivate it to run the programs.
 
 ### 4. Install Minimap2
 
