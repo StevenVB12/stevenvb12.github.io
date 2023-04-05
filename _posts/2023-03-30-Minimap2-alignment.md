@@ -151,7 +151,7 @@ First, with the `rect()` function we can define the genomic intervals/sequences 
 
   rect(1239943,0,1239972,0.8, col = 'red', border = 'red') # first exon position optix erato
   rect(1250591,0,1251211,0.8, col = 'red', border = 'red') # second exon position optix erato
-  rect(1239943,0.5,1251211,0.4, col = 'red', border = 'red') # A little line between the two and we have a gene model!
+  rect(1239943,0.4,1251211,0.4, col = 'red', border = 'red') # A little line between the two and we have a gene model!
 
   # With the text function, we can add the gene and species names at the appropriate coordinates.
   text(706407, 9.6, substitute(paste(italic('optix'))), pos = 4)
@@ -236,7 +236,7 @@ Let's make sure <i>optix</i> is aligned at the center of the plot between the tw
 
   rect(1239943,0,1239972,0.8, col = 'red', border = 'red') # first exon position optix erato
   rect(1250591,0,1251211,0.8, col = 'red', border = 'red') # second exon position optix erato
-  rect(1239943,0.5,1251211,0.4, col = 'red', border = 'red') # A little line between the two and we have a gene model!
+  rect(1239943,0.4,1251211,0.4, col = 'red', border = 'red') # A little line between the two and we have a gene model!
 
   # With the text function, we can add the gene and species names at the appropriate coordinates.
   text(706407+plotDiff, 9.6, substitute(paste(italic('optix'))), pos = 4)
@@ -310,7 +310,7 @@ Now we can add the alignment polygons for a zoomed-in window to the predefined l
 
   rect(1239943,0,1239972,0.8, col = 'red', border = 'red') # first exon position optix erato
   rect(1250591,0,1251211,0.8, col = 'red', border = 'red') # second exon position optix erato
-  rect(1239943,0.5,1251211,0.4, col = 'red', border = 'red') # A little line between the two and we have a gene model!
+  rect(1239943,0.4,1251211,0.4, col = 'red', border = 'red') # A little line between the two and we have a gene model!
 
   # With the text function, we can add the gene and species names at the appropriate coordinates.
   text(706407+plotDiff, 9.6, substitute(paste(italic('optix'))), pos = 4)
