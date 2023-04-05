@@ -271,6 +271,10 @@ But before we do this, let's build a more complex layout of our plot first. The 
 
   par(mar = c(0.5,5,0.5,1), xpd = FALSE) # This will set some margin settings which helps creating space for our axes labels.
   
+  # Define the interval (relative to the H. erato genome)
+  start = 1239943 - 10000
+  end = 1251211 + 200000
+  
   # Plot the title of the plot
   plot(NULL, xlim=c(start,end), ylim = c(0,1), axes=FALSE, ann=FALSE)
   mtext('Minimap2 aligned genome plot', side = 1, cex=1, col = 'black', line =-1)
@@ -289,10 +293,6 @@ Now we can add the alignment polygons for a zoomed-in window to the predefined l
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
   
   ```r
-  # Define the interval (relative to the H. erato genome)
-  start = 1239943 - 10000
-  end = 1251211 + 200000
-
   # Calculate the offset between the positions of optix in the two fasta sequences.
   # We will use this to modify all the x-axes coordinates for H. melpomene.
   plotDiff = 1251211 - 706407
