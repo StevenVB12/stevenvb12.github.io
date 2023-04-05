@@ -80,8 +80,13 @@ categories: misc
 
 ### 4. Install Minimap2
 
+Windows:
   ````sh
   conda install minimap2
+  ````
+Mac:
+  ````sh
+  conda install "bioconda/label/cf201901" minimap2
   ````
   
 ### 5. Install bedtools
