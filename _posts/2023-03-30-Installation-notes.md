@@ -117,7 +117,7 @@ Rstudio can be downloaded [here](https://posit.co/download/rstudio-desktop/).
 
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;">
 
-  To quickly run the entire code and have all the input files, clone [this](https://github.com/StevenVB12/Tutorial_pan_genomics) repository.
+  To quickly run the entire code and have all the input files, clone [this](https://github.com/StevenVB12/Tutorial_pan_genomics) repository. If you don't have git installed, check [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
   
  ````sh
   git clone https://github.com/StevenVB12/Tutorial_pan_genomics
