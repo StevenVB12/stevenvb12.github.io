@@ -270,6 +270,16 @@ But before we do this, let's build a more complex layout of our plot first. The 
   layout.show(n=7) # This will visualize our defined layout.
 
   par(mar = c(0.5,5,0.5,1), xpd = FALSE) # This will set some margin settings which helps creating space for our axes labels.
+  
+  # Plot the title of the plot
+  plot(NULL, xlim=c(start,end), ylim = c(0,1), axes=FALSE, ann=FALSE)
+  mtext('PAN genome plot', side = 1, cex=1, col = 'black', line =-1)
+
+  # Plot the x-axis as a separate plot
+  plot(NULL, xlim=c(start,end), ylim = c(0,1), axes=FALSE, ann=FALSE)
+  axis(1, at = seq(0,3124353, by=10000), labels = NA, line =-3)
+  axis(1, at = seq(0,3124353, by=100000), labels = round(seq(0/1000000,3124353/1000000, by=0.1),1), line =-3)
+  mtext('Chromosome position', side = 1, cex=0.8, col = 'black', line =-1)
   ```
 
 </div>
