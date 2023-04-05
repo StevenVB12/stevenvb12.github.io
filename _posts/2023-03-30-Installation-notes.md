@@ -4,8 +4,28 @@ title: "Installation notes"
 categories: misc
 ---
 
-### 1. Install Linux (Ubuntu) using WSL on windows
+### 1. Install Linux (Ubuntu) using WSL on windows (10 or higher)
 
+(If you are on a Mac, just open a terminal and continue)
+
+* In your Windows search bar type `PowerShell`, right-click the result and "Run as administrator". 
+
+* Enter the following command and restart your computer:
+  ````sh
+  wsl --install -d ubuntu
+  ````
+
+* Open Ubuntu by searching for it in your Windows search bar.
+
+* Once Ubuntu has finished its initial setup you will need to create a username and password (this does not need to match your Windows user credentials).
+
+* Finally, it’s always good practice to install the latest updates with the following commands, entering your password when prompted.
+  ````sh
+  sudo apt update
+  sudo apt upgrade
+  ````
+  Press Y when prompted.
+  
 ### 2. Install Miniconda
 
 * First, download the installation [script](https://docs.conda.io/en/latest/miniconda.html#linux-installers).
