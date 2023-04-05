@@ -84,7 +84,7 @@ I you don'have it installed already:
 R can be downloaded [here](https://cran.r-project.org/).
 Rstudio can be downloaded [here](https://posit.co/download/rstudio-desktop/).
 
-In R we will use the rtracklayer library to read the ATAC-seq bedgraph files. It would be possible to simply read in the ATAC-seq bedgraphs as a regular table, but because in reality you would probably want to work with compressed bigwig files, I show you how to use `rtracklayer`. This library is hosted by bioconductor and can be downloaded and installed in R as follows:
+> In R we will use the rtracklayer library to read the ATAC-seq bedgraph files. It would be possible to simply read in the ATAC-seq bedgraphs as a regular table, but because in reality you would probably want to work with compressed bigwig files, I show you how to use `rtracklayer`. This library is hosted by bioconductor and can be downloaded and installed in R as follows:
 
   ````r
   if (!require("BiocManager", quietly = TRUE))
