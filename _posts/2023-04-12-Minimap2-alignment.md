@@ -14,7 +14,7 @@ categories: misc
   
   To make sure you have everything installed and setup, check [here](https://stevenvb12.github.io/2023/03/30/Installation-notes.html).
   
-</div>
+</div> 
 
 ### 1. Introduction
 
