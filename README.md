@@ -8,11 +8,11 @@ In this tutorial I guide you through code for a [Minimap2](https://academic.oup.
 </p>
 
 
-1. [Check the required installations](https://stevenvb12.github.io/2023/04/12/Installation-notes.html)
+1. [Check the required installations](https://stevenvb12.github.io/2023/03/30/Installation-notes.html)
 
-2. [Go to Minimap2 alignment tutorial](https://stevenvb12.github.io/2023/04/12/Minimap2_alignment.html)
+2. [Go to Minimap2 alignment tutorial](https://stevenvb12.github.io/2023/03/30/Minimap2_alignment.html)
 
-3. [Go to PAN genome alignment tutorial](https://stevenvb12.github.io/2023/04/12/PAN_genomics.html)
+3. [Go to PAN genome alignment tutorial](https://stevenvb12.github.io/2023/03/30/PAN_genomics.html)
 
 > It is possible to extend these codes to work for entire chromosomes or genomes and using more than two populations or species!
 
