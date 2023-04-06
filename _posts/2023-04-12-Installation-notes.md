@@ -6,7 +6,7 @@ categories: misc
 
 ### 1. Install Linux (Ubuntu) using WSL on windows (10 or higher)
 
-(If you are on a Mac, just open a terminal and continue)
+(If you are on a Mac, just open a terminal and continue) 
 
 * In your Windows search bar type `PowerShell`, right-click the result and "Run as administrator". 
 
