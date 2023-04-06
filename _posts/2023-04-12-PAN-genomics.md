@@ -18,7 +18,7 @@ categories: misc
 
 ### 1. Introduction
 
-In this tutorial we will align a piece of chromosome of two <i>Heliconius</i> butterfly species that includes the <i>optix</i> gene into a <strong>pan genome alignment</strong>. 
+In this tutorial we will align a piece of chromosome of two <i>Heliconius</i> butterfly species that includes the <i>optix</i> gene into a <strong>pan genome alignment</strong>.  
 
 > <p align="center">
 >  <img src="/docs/assets/Heliconius-melpomene-and-erato.jpg" width="300" title="rect()">
