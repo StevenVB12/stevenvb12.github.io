@@ -73,7 +73,7 @@ For our sequences, we will use Minimap2 as follows:
 <div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #000000; background-color: #000000; border-color: #000000;">
   
   ````sh
-  minimap2 -x asm20 sequences/Hmel213003_1_2000000.fasta sequences/Herato1801_1_2000000.fasta --no-long-join -r 200 | cut -f 1-12 > Minimap_out/Minimap_melp_erato.sam
+  minimap2 -x asm20 sequences/Hmel213003_1_2000000.fasta sequences/Herato1801_1_2000000.fasta --no-long-join -r 200 | cut -f 1-12 > Minimap2_out/Minimap_melp_erato.sam
   ````
 </div>
 
